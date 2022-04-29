@@ -71,28 +71,27 @@
      WHILE = 287,
      TRUE = 288,
      FALSE = 289,
-     EOL = 290,
-     EOP = 291,
-     T = 292,
-     L = 293,
-     ID = 294,
-     NUM = 295,
-     KEY = 296,
-     SHAPE = 297,
-     AND = 298,
-     OR = 299,
-     ENDWHILE = 300,
-     TICK = 301,
-     ENDTICK = 302,
-     PAUSE_BOOL = 303,
-     ELSE = 304,
-     LOST = 305,
-     WIN = 306,
-     RIGHT = 307,
-     DOWN = 308,
-     LEFT = 309,
-     TIME = 310,
-     INIT = 311
+     EOP = 290,
+     T = 291,
+     L = 292,
+     ID = 293,
+     NUM = 294,
+     KEY = 295,
+     SHAPE = 296,
+     AND = 297,
+     OR = 298,
+     ENDWHILE = 299,
+     TICK = 300,
+     ENDTICK = 301,
+     PAUSE_BOOL = 302,
+     ELSE = 303,
+     LOST = 304,
+     WIN = 305,
+     RIGHT = 306,
+     DOWN = 307,
+     LEFT = 308,
+     TIME = 309,
+     INIT = 310
    };
 #endif
 /* Tokens.  */
@@ -128,28 +127,27 @@
 #define WHILE 287
 #define TRUE 288
 #define FALSE 289
-#define EOL 290
-#define EOP 291
-#define T 292
-#define L 293
-#define ID 294
-#define NUM 295
-#define KEY 296
-#define SHAPE 297
-#define AND 298
-#define OR 299
-#define ENDWHILE 300
-#define TICK 301
-#define ENDTICK 302
-#define PAUSE_BOOL 303
-#define ELSE 304
-#define LOST 305
-#define WIN 306
-#define RIGHT 307
-#define DOWN 308
-#define LEFT 309
-#define TIME 310
-#define INIT 311
+#define EOP 290
+#define T 291
+#define L 292
+#define ID 293
+#define NUM 294
+#define KEY 295
+#define SHAPE 296
+#define AND 297
+#define OR 298
+#define ENDWHILE 299
+#define TICK 300
+#define ENDTICK 301
+#define PAUSE_BOOL 302
+#define ELSE 303
+#define LOST 304
+#define WIN 305
+#define RIGHT 306
+#define DOWN 307
+#define LEFT 308
+#define TIME 309
+#define INIT 310
 
 
 
@@ -162,7 +160,7 @@ typedef union YYSTYPE
 	char var_name[30];
 }
 /* Line 1529 of yacc.c.  */
-#line 166 "y.tab.h"
+#line 164 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

@@ -63,7 +63,6 @@ NUM	[0-9][0-9]*
 "init" return(INIT);
 "KEY_"{L} { strcpy(yylval.var_name, yytext); return KEY;} 
 "SHAPE_"{T} { strcpy(yylval.var_name, yytext); return SHAPE;} 
-"\n"    return (EOL);
 "#" return(EOP);
 {ID}	{strcpy(yylval.var_name, yytext); return(ID);}
 {NUM}   {strcpy(yylval.var_name,yytext); return(NUM);}

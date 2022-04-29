@@ -1,6 +1,7 @@
-targets: tetris.l tetris.y
+tetris: tetris.l tetris.y
 	lex tetris.l
-	yacc -d -v tetis.y
+	yacc -d -v tetris.y
+	gcc -w lex.yy.c y.tab.c -ll
 
 debug:  tetris.l tetris.y
 	lex tetris.l
