@@ -7,7 +7,7 @@
 	int yyerror(const char *s);
 	int yydebug = 1;
 	int success = 1;
-	int expn_type = -1;
+	int expn_type = 0;
 	int tab_count = 0;
 	int temp;
 	int idx = 0;
@@ -23,7 +23,10 @@
 	char var_name[30];
 }
 
-%token PLUS MINUS MUL DIV EQ NOTEQUAL GE GT LE LT ASSIGN GRID START CONF NOT SCORE LINE1 LINE2 LINE3 LINE4 DELETE CLOCKWISE ANTICLOCKWISE PAUSE UP ENDIF IF THEN DO WHILE TRUE FALSE EOP T L ID NUM KEY SHAPE AND OR ENDWHILE TICK ENDTICK PAUSE_BOOL ELSE LOST WIN RIGHT DOWN LEFT TIME INIT
+%token PLUS MINUS MUL DIV EQ NOTEQUAL GE GT LE LT AND OR NOT
+%token INIT ASSIGN IF THEN ELSE ENDIF DO WHILE ENDWHILE TICK ENDTICK EOP
+%token GRID START CONF SCORE LINE1 LINE2 LINE3 LINE4 DELETE PAUSE
+%token CLOCKWISE ANTICLOCKWISE UP RIGHT DOWN LEFT TRUE FALSE ID NUM KEY SHAPE PAUSE_BOOL LOST WIN TIME 
 
 %left OR
 %left AND
@@ -32,122 +35,95 @@
 %left MUL DIV 
 %left NOT
 
-%type<var_name>ID
+%type<var_name>ID NUM
 
 %start grid
 
 /* Rule Section */
 %%
-grid:	 			GRID ASSIGN NUM NUM{
-						printf("#include<stdio.h>\nint main()\n{\n");
-						tab_count++;
-					}
-					STATEMENTS EOP{
-						printf("}\n");
-					}
-STATEMENTS: 		STATEMENTS {print_tabs();} STATEMENT | ;
+grid:	 		GRID INIT NUM NUM {printf("");
+printf("#include <ctime>\n");
+printf("#include <curses.h>\n");
+printf("#include <unistd.h>\n");
+printf("#include <stdlib.h>\n");
+printf("#include <string.h>\n");
+printf("\n");
+printf("/ block layout is: {w-1,h-1}{x0,y0}{x1,y1}{x2,y2}{x3,y3} (two bits each)\n");
+printf("nt x = 431424, y = 598356, r = 427089, px = 247872, py = 799248, pr,\n");
+printf("   c = 348480, p = 615696, tick, board[%s][%s],\n", $3,$4);
+printf("   block[7][4] = {{x, y, x, y},\n");
+printf("                  {r, p, r, p},\n");
+printf("                  {c, c, c, c},\n");
+printf("                  {599636, 431376, 598336, 432192},\n");
+printf("                  {411985, 610832, 415808, 595540},\n");
+printf("                  {px, py, px, py},\n");
+printf("                  {614928, 399424, 615744, 428369}},\n");
+printf("   score = 0;\n");
+printf("\n");
+printf("// extract a 2-bit number from a block entry\n");
+printf("NUM(int x, int y) { return 3 & block[p][x] >> y; }\n");}
+				STATEMENTS EOP
+//    				| GRID INIT NUM NUM STATEMENTS error{yyerror("please enter '#'");}
+STATEMENTS: 		STATEMENTS  STATEMENT 
+	  			| ;
+STATEMENT: 		ID INIT NUM
+				| ID  ASSIGN A_EXPN 
+				| IF_BLOCK ENDIF
+				| IF_BLOCK ELSE_BLOCK ENDIF
+				| DO STATEMENTS WHILE BOOL_RET ENDWHILE 
+				| TICK STATEMENTS ENDTICK 
+				| CONF_STMENT 
+				| ST_STMENT 
+				| SCORE_STMENT 
+				| SHAPE_STMENT 
+				| TIME_STMENT 
+				| DELETE_STMENT 
+				| CUSTOM_SHAPE 
 
-STATEMENT: 			ID INIT NUM{
-					}
-					| ID {
-							printf("%s", $1);
-							if((temp=lookup_in_table($1))==-1) {
-								printf("\n variable \" %s\" undeclared\n", $1);
-								yyerror("");
-								exit(0);
-							}
-							expn_type=-1;
-					} 
-					ASSIGN
-					A_EXPN{
-						printf(";\n");
-					}
-					
-					| IF_BLOCK ELSE_BLOCK ENDIF
-					| IF_BLOCK ENDIF
-					| DO {printf("do{\n");tab_count++;}
-					  STATEMENTS {tab_count--;print_tabs();}
-					  WHILE{printf("}while(");} 
-				      BOOL_RET ENDWHILE {printf(");\n");}
-					| TICK {}
-					  STATEMENTS {}
-					  ENDTICK {}
-					| CONF_STMENT {}
-					| ST_STMENT {}
-					| SCORE_STMENT {}
-					| SHAPE_STMENT {}
-					| TIME_STMENT {}
-					| DELETE_STMENT {}
-					| CUSTOM_SHAPE {}
-
-IF_BLOCK:		 	IF {printf("if(");} 
-					BOOL_RET {printf("){\n");tab_count++;} 
-					THEN
-					STATEMENTS
-					{tab_count--;print_tabs();printf("}\n");}
-
-ELSE_BLOCK: 	    ELSE {print_tabs();printf("else{\n");tab_count++;} 
-					STATEMENTS
-					{tab_count--;print_tabs();printf("}\n");}
+IF_BLOCK:		IF{printf("if(");}  BOOL_RET{printf(")\n");} THEN {printf("{");} STATEMENTS {printf("}");}
+ELSE_BLOCK: 	  	ELSE{printf("else\n{");}  STATEMENTS
 
 A_EXPN: 		A_EXPN PLUS {printf("+");} A_EXPN
-				| A_EXPN MINUS {printf("-");} A_EXPN
-				| A_EXPN MUL {printf("*");} A_EXPN
-				| A_EXPN DIV {printf("/");} A_EXPN
+				| A_EXPN MINUS  A_EXPN
+				| A_EXPN MUL  A_EXPN
+				| A_EXPN DIV  A_EXPN
 				| TERMINALS
 				| SCORE
-				| TIME 
+				| TIME
 
-TERMINALS:			ID {
-						if((temp=lookup_in_table(yylval.var_name))!=-1) {
-							printf("%s", yylval.var_name);
-							if(expn_type==-1){
-								expn_type=temp;
-							}
-							else if(expn_type!=temp){
-								printf("\ntype mismatch in the expression\n");
-								yyerror("");
-								exit(0);
-							}
-						}
-						else{
-							printf("\n variable \"%s\" undeclared\n", yylval.var_name);
-							yyerror("");
-							exit(0);
-						}
-					}
-					| NUM {printf("%s", yylval.var_name);}
+TERMINALS:		ID{printf("%s",$1);} 
+				| NUM{printf("$1");}
 
 
-BOOL_RET: 		A_EXPN AND {printf("&&");} A_EXPN
+BOOL_RET: 		A_EXPN AND{printf("&&");}  A_EXPN
 				| A_EXPN OR {printf("||");} A_EXPN
 	 			| A_EXPN LE {printf("<=");} A_EXPN
 				| A_EXPN GE {printf(">=");} A_EXPN
 				| A_EXPN GT {printf(">");} A_EXPN
 				| A_EXPN LT {printf("<");} A_EXPN
 				| A_EXPN NOTEQUAL {printf("!=");} A_EXPN
-				| A_EXPN EQ {printf("==");} A_EXPN
-				| NOT {printf("!");} A_EXPN 
-				| WIN | LOST | PAUSE_BOOL
-				| TRUE | FALSE
-				| GRID A_EXPN A_EXPN
+				| A_EXPN EQ  {printf("==");} A_EXPN
+				| NOT  {printf("!");} A_EXPN 
+				| WIN  {printf("win");}| LOST {printf("lost");}| PAUSE_BOOL{printf("pause_bool");}
+				| TRUE {printf("true");} | FALSE{printf("false");}
+				| GRID {printf("grid[");} A_EXPN {printf("][");} A_EXPN {printf("]");}
 
-ST_STMENT: 		START ASSIGN NUM NUM
-CONF_STMENT: 	CONF action KEY {printf("%s",yylval.var_name);}
+ST_STMENT: 		START INIT NUM NUM
+CONF_STMENT: 		CONF action KEY 
 action: 		UP | DOWN | LEFT | RIGHT 
 				| CLOCKWISE | ANTICLOCKWISE 
 				| PAUSE
 
-SCORE_STMENT: 	SCORE ASSIGN NUM
+SCORE_STMENT: 		SCORE ASSIGN{printf("=");} NUM
 				| SCORE PLUS A_EXPN
 				| SCORE MINUS A_EXPN
 
-SHAPE_STMENT: SHAPE BOOL_RET 
+SHAPE_STMENT: 		SHAPE BOOL_RET 
 
-TIME_STMENT: TIME PLUS A_EXPN
-DELETE_STMENT: DELETE A_EXPN A_EXPN
+TIME_STMENT: 		TIME PLUS A_EXPN
+DELETE_STMENT: 		DELETE A_EXPN A_EXPN
 
-CUSTOM_SHAPE: 	LINE1 BOOL_RET BOOL_RET BOOL_RET BOOL_RET 
+CUSTOM_SHAPE: 		LINE1 BOOL_RET BOOL_RET BOOL_RET BOOL_RET 
 				LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET 
 				LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET 
 				LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET 
