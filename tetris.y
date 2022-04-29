@@ -48,10 +48,10 @@ printf("#include <unistd.h>\n");
 printf("#include <stdlib.h>\n");
 printf("#include <string.h>\n");
 printf("\n");
-printf("/ block layout is: {w-1,h-1}{x0,y0}{x1,y1}{x2,y2}{x3,y3} (two bits each)\n");
-printf("nt x = 431424, y = 598356, r = 427089, px = 247872, py = 799248, pr,\n");
-printf("   c = 348480, p = 615696, tick, board[%s][%s],\n", $3,$4);
-printf("   block[7][4] = {{x, y, x, y},\n");
+printf("// block layout is: {w-1,h-1}{x0,y0}{x1,y1}{x2,y2}{x3,y3} (two bits each)\n");
+printf("int x = 431424, y = 598356, r = 427089, px = 247872, py = 799248, pr,\n");
+printf("    c = 348480, p = 615696, tick, board[%s][%s],\n", $3,$4);
+printf("    block[7][4] = {{x, y, x, y},\n");
 printf("                  {r, p, r, p},\n");
 printf("                  {c, c, c, c},\n");
 printf("                  {599636, 431376, 598336, 432192},\n");
@@ -61,7 +61,7 @@ printf("                  {614928, 399424, 615744, 428369}},\n");
 printf("   score = 0;\n");
 printf("\n");
 printf("// extract a 2-bit number from a block entry\n");
-printf("NUM(int x, int y) { return 3 & block[p][x] >> y; }\n");}
+printf("int NUM(int x, int y) { return 3 & block[p][x] >> y; }\n");}
 				STATEMENTS EOP
 //    				| GRID INIT NUM NUM STATEMENTS error{yyerror("please enter '#'");}
 STATEMENTS: 		STATEMENTS  STATEMENT 
