@@ -122,37 +122,6 @@ CUSTOM_SHAPE: 	LINE1 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
 %%
 
-int lookup_in_table(char var[30])
-{
-	for(int i=0; i<table_idx; i++)
-	{
-		if(strcmp(sym[i].var_name, var)==0)
-			return sym[i].type;
-	}
-	return -1;
-}
-void insert_to_table(char var[30], int type)
-{
-	if(lookup_in_table(var)==-1)
-	{
-		strcpy(sym[table_idx].var_name,var);
-		sym[table_idx].type = type;
-		table_idx++;
-	}
-	else {
-		printf("Multiple declaration of variable\n");
-		yyerror("");
-		exit(0);
-	}
-}
-
-void print_tabs() {
-	for(int i = 0; i < tab_count; i++){
-		printf("\t");
-	}
-	return;
-}
-
 int main() {
 	yyparse();
 	return 0;

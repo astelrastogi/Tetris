@@ -156,7 +156,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 21 "cc_proj.y"
+#line 21 "tetris.y"
 {
 	int data_type;
 	char var_name[30];

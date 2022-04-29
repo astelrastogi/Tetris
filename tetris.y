@@ -96,7 +96,7 @@ A_EXPN: 		A_EXPN PLUS {printf("+");} A_EXPN
 				| A_EXPN DIV {printf("/");} A_EXPN
 				| TERMINALS
 				| SCORE
-				| TIME
+				| TIME | EOL
 
 TERMINALS:			ID {
 						if((temp=lookup_in_table(yylval.var_name))!=-1) {

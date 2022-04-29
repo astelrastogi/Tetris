@@ -182,7 +182,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "cc_proj.y"
+#line 1 "tetris.y"
 
 /* Definition section */
 	#include<stdio.h>
@@ -223,7 +223,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 21 "cc_proj.y"
+#line 21 "tetris.y"
 {
 	int data_type;
 	char var_name[30];
@@ -1588,7 +1588,7 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 41 "cc_proj.y"
+#line 41 "tetris.y"
     {
 						printf("#include<stdio.h>\nint main()\n{\n");
 						tab_count++;
@@ -1596,25 +1596,25 @@ yyreduce:
     break;
 
   case 3:
-#line 45 "cc_proj.y"
+#line 45 "tetris.y"
     {
 						printf("}\n");
 					}
     break;
 
   case 4:
-#line 48 "cc_proj.y"
+#line 48 "tetris.y"
     {print_tabs();}
     break;
 
   case 7:
-#line 50 "cc_proj.y"
+#line 50 "tetris.y"
     {
 					}
     break;
 
   case 8:
-#line 52 "cc_proj.y"
+#line 52 "tetris.y"
     {
 							printf("%s", (yyvsp[(1) - (1)].var_name));
 							if((temp=lookup_in_table((yyvsp[(1) - (1)].var_name)))==-1) {
@@ -1627,129 +1627,129 @@ yyreduce:
     break;
 
   case 9:
-#line 62 "cc_proj.y"
+#line 62 "tetris.y"
     {
 						printf(";\n");
 					}
     break;
 
   case 12:
-#line 68 "cc_proj.y"
+#line 68 "tetris.y"
     {printf("do{\n");tab_count++;}
     break;
 
   case 13:
-#line 69 "cc_proj.y"
+#line 69 "tetris.y"
     {tab_count--;print_tabs();}
     break;
 
   case 14:
-#line 70 "cc_proj.y"
+#line 70 "tetris.y"
     {printf("}while(");}
     break;
 
   case 15:
-#line 71 "cc_proj.y"
+#line 71 "tetris.y"
     {printf(");\n");}
     break;
 
   case 16:
-#line 72 "cc_proj.y"
+#line 72 "tetris.y"
     {}
     break;
 
   case 17:
-#line 73 "cc_proj.y"
+#line 73 "tetris.y"
     {}
     break;
 
   case 18:
-#line 74 "cc_proj.y"
+#line 74 "tetris.y"
     {}
     break;
 
   case 19:
-#line 75 "cc_proj.y"
+#line 75 "tetris.y"
     {}
     break;
 
   case 20:
-#line 76 "cc_proj.y"
+#line 76 "tetris.y"
     {}
     break;
 
   case 21:
-#line 77 "cc_proj.y"
+#line 77 "tetris.y"
     {}
     break;
 
   case 22:
-#line 78 "cc_proj.y"
+#line 78 "tetris.y"
     {}
     break;
 
   case 23:
-#line 79 "cc_proj.y"
+#line 79 "tetris.y"
     {}
     break;
 
   case 24:
-#line 80 "cc_proj.y"
+#line 80 "tetris.y"
     {}
     break;
 
   case 25:
-#line 81 "cc_proj.y"
+#line 81 "tetris.y"
     {}
     break;
 
   case 26:
-#line 83 "cc_proj.y"
+#line 83 "tetris.y"
     {printf("if(");}
     break;
 
   case 27:
-#line 84 "cc_proj.y"
+#line 84 "tetris.y"
     {printf("){\n");tab_count++;}
     break;
 
   case 28:
-#line 87 "cc_proj.y"
+#line 87 "tetris.y"
     {tab_count--;print_tabs();printf("}\n");}
     break;
 
   case 29:
-#line 89 "cc_proj.y"
+#line 89 "tetris.y"
     {print_tabs();printf("else{\n");tab_count++;}
     break;
 
   case 30:
-#line 91 "cc_proj.y"
+#line 91 "tetris.y"
     {tab_count--;print_tabs();printf("}\n");}
     break;
 
   case 31:
-#line 93 "cc_proj.y"
+#line 93 "tetris.y"
     {printf("+");}
     break;
 
   case 33:
-#line 94 "cc_proj.y"
+#line 94 "tetris.y"
     {printf("-");}
     break;
 
   case 35:
-#line 95 "cc_proj.y"
+#line 95 "tetris.y"
     {printf("*");}
     break;
 
   case 37:
-#line 96 "cc_proj.y"
+#line 96 "tetris.y"
     {printf("/");}
     break;
 
   case 42:
-#line 101 "cc_proj.y"
+#line 101 "tetris.y"
     {
 						if((temp=lookup_in_table(yylval.var_name))!=-1) {
 							printf("%s", yylval.var_name);
@@ -1771,57 +1771,57 @@ yyreduce:
     break;
 
   case 43:
-#line 119 "cc_proj.y"
+#line 119 "tetris.y"
     {printf("%s", yylval.var_name);}
     break;
 
   case 44:
-#line 122 "cc_proj.y"
+#line 122 "tetris.y"
     {printf("&&");}
     break;
 
   case 46:
-#line 123 "cc_proj.y"
+#line 123 "tetris.y"
     {printf("||");}
     break;
 
   case 48:
-#line 124 "cc_proj.y"
+#line 124 "tetris.y"
     {printf("<=");}
     break;
 
   case 50:
-#line 125 "cc_proj.y"
+#line 125 "tetris.y"
     {printf(">=");}
     break;
 
   case 52:
-#line 126 "cc_proj.y"
+#line 126 "tetris.y"
     {printf(">");}
     break;
 
   case 54:
-#line 127 "cc_proj.y"
+#line 127 "tetris.y"
     {printf("<");}
     break;
 
   case 56:
-#line 128 "cc_proj.y"
+#line 128 "tetris.y"
     {printf("!=");}
     break;
 
   case 58:
-#line 129 "cc_proj.y"
+#line 129 "tetris.y"
     {printf("==");}
     break;
 
   case 60:
-#line 130 "cc_proj.y"
+#line 130 "tetris.y"
     {printf("!");}
     break;
 
   case 69:
-#line 136 "cc_proj.y"
+#line 136 "tetris.y"
     {printf("%s",yylval.var_name);}
     break;
 
@@ -2041,7 +2041,7 @@ yyreturn:
 }
 
 
-#line 156 "cc_proj.y"
+#line 156 "tetris.y"
 
 
 int lookup_in_table(char var[30])

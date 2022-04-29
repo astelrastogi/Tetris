@@ -617,8 +617,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "cc_proj.l"
-#line 3 "cc_proj.l"
+#line 1 "tetris.l"
+#line 3 "tetris.l"
 #include <stdio.h>
 #include <time.h>
 #include "y.tab.h"
@@ -804,7 +804,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 14 "cc_proj.l"
+#line 14 "tetris.l"
 
 
 #line 811 "lex.yy.c"
@@ -903,278 +903,278 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 16 "cc_proj.l"
+#line 16 "tetris.l"
 { };
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 17 "cc_proj.l"
+#line 17 "tetris.l"
 { };
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 18 "cc_proj.l"
+#line 18 "tetris.l"
 return(PLUS);
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 19 "cc_proj.l"
+#line 19 "tetris.l"
 return(MINUS);
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 20 "cc_proj.l"
+#line 20 "tetris.l"
 return(MUL);
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 21 "cc_proj.l"
+#line 21 "tetris.l"
 return(DIV);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 22 "cc_proj.l"
+#line 22 "tetris.l"
 return(EQ);
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 23 "cc_proj.l"
+#line 23 "tetris.l"
 return(NOTEQUAL);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 24 "cc_proj.l"
+#line 24 "tetris.l"
 return(GE);
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 25 "cc_proj.l"
+#line 25 "tetris.l"
 return(GT);
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 26 "cc_proj.l"
+#line 26 "tetris.l"
 return(LE);
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 27 "cc_proj.l"
+#line 27 "tetris.l"
 return(LT);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 28 "cc_proj.l"
+#line 28 "tetris.l"
 return(ASSIGN);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 29 "cc_proj.l"
+#line 29 "tetris.l"
 return (NOT);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 30 "cc_proj.l"
+#line 30 "tetris.l"
 return(GRID);
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 31 "cc_proj.l"
+#line 31 "tetris.l"
 return(START);
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 32 "cc_proj.l"
+#line 32 "tetris.l"
 return(CONF);
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 33 "cc_proj.l"
+#line 33 "tetris.l"
 return(SCORE);
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 34 "cc_proj.l"
+#line 34 "tetris.l"
 return(LINE1);
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 35 "cc_proj.l"
+#line 35 "tetris.l"
 return(LINE2);
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 36 "cc_proj.l"
+#line 36 "tetris.l"
 return(LINE3);
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 37 "cc_proj.l"
+#line 37 "tetris.l"
 return(LINE4);
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 38 "cc_proj.l"
+#line 38 "tetris.l"
 return(SHAPE);
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 39 "cc_proj.l"
+#line 39 "tetris.l"
 return(DELETE);
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 40 "cc_proj.l"
+#line 40 "tetris.l"
 return(CLOCKWISE);
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 41 "cc_proj.l"
+#line 41 "tetris.l"
 return(ANTICLOCKWISE);
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 42 "cc_proj.l"
+#line 42 "tetris.l"
 return(PAUSE);
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 43 "cc_proj.l"
+#line 43 "tetris.l"
 return(PAUSE_BOOL);
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 44 "cc_proj.l"
+#line 44 "tetris.l"
 return (TIME);
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 45 "cc_proj.l"
+#line 45 "tetris.l"
 return(UP);
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 46 "cc_proj.l"
+#line 46 "tetris.l"
 return(ENDIF);
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 47 "cc_proj.l"
+#line 47 "tetris.l"
 return(DOWN);
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 48 "cc_proj.l"
+#line 48 "tetris.l"
 return(LEFT);
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 49 "cc_proj.l"
+#line 49 "tetris.l"
 return(RIGHT);
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 50 "cc_proj.l"
+#line 50 "tetris.l"
 return(IF);
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 51 "cc_proj.l"
+#line 51 "tetris.l"
 return (THEN);
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 52 "cc_proj.l"
+#line 52 "tetris.l"
 return (AND);
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 53 "cc_proj.l"
+#line 53 "tetris.l"
 return (OR);
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 54 "cc_proj.l"
+#line 54 "tetris.l"
 return (LOST);
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 55 "cc_proj.l"
+#line 55 "tetris.l"
 return (WIN);
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 56 "cc_proj.l"
+#line 56 "tetris.l"
 return(DO);
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 57 "cc_proj.l"
+#line 57 "tetris.l"
 return(ENDWHILE);
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 58 "cc_proj.l"
+#line 58 "tetris.l"
 return(TICK);
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 59 "cc_proj.l"
+#line 59 "tetris.l"
 return(ENDTICK);
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 60 "cc_proj.l"
+#line 60 "tetris.l"
 return(WHILE);
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 61 "cc_proj.l"
+#line 61 "tetris.l"
 return(TRUE);
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 62 "cc_proj.l"
+#line 62 "tetris.l"
 return(FALSE);
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 63 "cc_proj.l"
+#line 63 "tetris.l"
 return(INIT);
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 64 "cc_proj.l"
+#line 64 "tetris.l"
 { strcpy(yylval.var_name, yytext); return KEY;} 
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 65 "cc_proj.l"
+#line 65 "tetris.l"
 { strcpy(yylval.var_name, yytext); return SHAPE;} 
 	YY_BREAK
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 66 "cc_proj.l"
+#line 66 "tetris.l"
 return (EOL);
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 67 "cc_proj.l"
+#line 67 "tetris.l"
 return(EOP);
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 68 "cc_proj.l"
+#line 68 "tetris.l"
 {strcpy(yylval.var_name, yytext); return(ID);}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 69 "cc_proj.l"
+#line 69 "tetris.l"
 {strcpy(yylval.var_name,yytext); return(NUM);}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 70 "cc_proj.l"
+#line 70 "tetris.l"
 ECHO;
 	YY_BREAK
 #line 1181 "lex.yy.c"
@@ -2186,6 +2186,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 70 "cc_proj.l"
+#line 70 "tetris.l"
 
 
