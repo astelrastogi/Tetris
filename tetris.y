@@ -51,6 +51,13 @@ printf("\n");
 printf("/ block layout is: {w-1,h-1}{x0,y0}{x1,y1}{x2,y2}{x3,y3} (two bits each)\n");
 printf("nt x = 431424, y = 598356, r = 427089, px = 247872, py = 799248, pr,\n");
 printf("   c = 348480, p = 615696, tick, board[%s][%s],\n", $3,$4);
+
+int rows, col;
+cin >> rows >> col;
+vector<vector<int> > block(rows,vector<int>(col,0));
+vector<int> v={2,3,1};
+block.push_back(v)
+block.resize(rows,vector<int>(col));
 printf("   block[7][4] = {{x, y, x, y},\n");
 printf("                  {r, p, r, p},\n");
 printf("                  {c, c, c, c},\n");
