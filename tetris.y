@@ -5,7 +5,6 @@
 	#include<string.h>
 	int yylex(void);
 	int yyerror(const char *s);
-	int yydebug = 1;
 	int success = 1;
 	int expn_type = -1;
 	int tab_count = 0;
@@ -23,7 +22,7 @@
 	char var_name[30];
 }
 
-%token PLUS MINUS MUL DIV EQ NOTEQUAL GE GT LE LT ASSIGN GRID START CONF NOT SCORE LINE1 LINE2 LINE3 LINE4 DELETE CLOCKWISE ANTICLOCKWISE PAUSE UP ENDIF IF THEN DO WHILE TRUE FALSE EOP T L ID NUM KEY SHAPE AND OR ENDWHILE TICK ENDTICK PAUSE_BOOL ELSE LOST WIN RIGHT DOWN LEFT TIME INIT
+%token PLUS MINUS MUL DIV EQ NOTEQUAL GE GT LE LT ASSIGN GRID START CONF NOT SCORE LINE1 LINE2 LINE3 LINE4 DELETE CLOCKWISE ANTICLOCKWISE PAUSE UP ENDIF IF THEN DO WHILE TRUE FALSE EOL EOP T L ID NUM KEY SHAPE AND OR ENDWHILE TICK ENDTICK PAUSE_BOOL ELSE LOST WIN RIGHT DOWN LEFT TIME INIT
 
 %left OR
 %left AND
@@ -33,6 +32,8 @@
 %left NOT
 
 %type<var_name>ID
+%type<var_name>T
+%type<var_name>L
 
 %start grid
 
@@ -45,7 +46,7 @@ grid:	 			GRID ASSIGN NUM NUM{
 					STATEMENTS EOP{
 						printf("}\n");
 					}
-STATEMENTS: 		STATEMENTS {print_tabs();} STATEMENT | ;
+STATEMENTS: 		STATEMENTS {print_tabs();} STATEMENT | EOL
 
 STATEMENT: 			ID INIT NUM{
 					}
@@ -59,7 +60,7 @@ STATEMENT: 			ID INIT NUM{
 							expn_type=-1;
 					} 
 					ASSIGN
-					A_EXPN{
+					A_EXPN EOL{
 						printf(";\n");
 					}
 					
@@ -68,7 +69,7 @@ STATEMENT: 			ID INIT NUM{
 					| DO {printf("do{\n");tab_count++;}
 					  STATEMENTS {tab_count--;print_tabs();}
 					  WHILE{printf("}while(");} 
-				      BOOL_RET ENDWHILE {printf(");\n");}
+				      BOOL_RET EOL {printf(");\n");}
 					| TICK {}
 					  STATEMENTS {}
 					  ENDTICK {}
@@ -96,7 +97,7 @@ A_EXPN: 		A_EXPN PLUS {printf("+");} A_EXPN
 				| A_EXPN DIV {printf("/");} A_EXPN
 				| TERMINALS
 				| SCORE
-				| TIME 
+				| TIME
 
 TERMINALS:			ID {
 						if((temp=lookup_in_table(yylval.var_name))!=-1) {
@@ -122,7 +123,6 @@ TERMINALS:			ID {
 BOOL_RET: 		A_EXPN AND {printf("&&");} A_EXPN
 				| A_EXPN OR {printf("||");} A_EXPN
 	 			| A_EXPN LE {printf("<=");} A_EXPN
-				| A_EXPN GE {printf(">=");} A_EXPN
 				| A_EXPN GT {printf(">");} A_EXPN
 				| A_EXPN LT {printf("<");} A_EXPN
 				| A_EXPN NOTEQUAL {printf("!=");} A_EXPN
