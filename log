@@ -1,0 +1,13 @@
+int grid_x = 10, grid_y = 9
+void Game::trasformTetromino (int key) {
+    switch (key) {
+case KEY_UP:
+            tetromino.moveUp();
+            if (collideWithTetrominoes()) tetromino.moveDown();
+            break;
+case KEY_A:
+            tetromino.moveLeft();
+            if (collideWithTetrominoes()) tetromino.moveRight();
+            break;
+
+}}

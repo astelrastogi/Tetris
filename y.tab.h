@@ -1,14 +1,14 @@
-/* A Bison parser, made by GNU Bison 2.3.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
-/* Skeleton interface for Bison's Yacc-like parsers in C
+/* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
-   Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Inc.
 
-   This program is free software; you can redistribute it and/or modify
+   This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,9 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -33,66 +31,76 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* Tokens.  */
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
+#ifndef YY_YY_Y_TAB_H_INCLUDED
+# define YY_YY_Y_TAB_H_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 1
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     PLUS = 258,
-     MINUS = 259,
-     MUL = 260,
-     DIV = 261,
-     EQ = 262,
-     NOTEQUAL = 263,
-     GE = 264,
-     GT = 265,
-     LE = 266,
-     LT = 267,
-     ASSIGN = 268,
-     GRID = 269,
-     START = 270,
-     CONF = 271,
-     NOT = 272,
-     SCORE = 273,
-     LINE1 = 274,
-     LINE2 = 275,
-     LINE3 = 276,
-     LINE4 = 277,
-     DELETE = 278,
-     CLOCKWISE = 279,
-     ANTICLOCKWISE = 280,
-     PAUSE = 281,
-     UP = 282,
-     ENDIF = 283,
-     IF = 284,
-     THEN = 285,
-     DO = 286,
-     WHILE = 287,
-     TRUE = 288,
-     FALSE = 289,
-     EOP = 290,
-     T = 291,
-     L = 292,
-     ID = 293,
-     NUM = 294,
-     KEY = 295,
-     SHAPE = 296,
-     AND = 297,
-     OR = 298,
-     ENDWHILE = 299,
-     TICK = 300,
-     ENDTICK = 301,
-     PAUSE_BOOL = 302,
-     ELSE = 303,
-     LOST = 304,
-     WIN = 305,
-     RIGHT = 306,
-     DOWN = 307,
-     LEFT = 308,
-     TIME = 309,
-     INIT = 310
-   };
+  enum yytokentype
+  {
+    PLUS = 258,
+    MINUS = 259,
+    MUL = 260,
+    DIV = 261,
+    EQ = 262,
+    NOTEQUAL = 263,
+    GE = 264,
+    GT = 265,
+    LE = 266,
+    LT = 267,
+    AND = 268,
+    OR = 269,
+    NOT = 270,
+    INIT = 271,
+    ASSIGN = 272,
+    IF = 273,
+    THEN = 274,
+    ELSE = 275,
+    ENDIF = 276,
+    DO = 277,
+    WHILE = 278,
+    ENDWHILE = 279,
+    TICK = 280,
+    ENDTICK = 281,
+    EOP = 282,
+    GRID = 283,
+    START = 284,
+    CONF = 285,
+    SCORE = 286,
+    LINE1 = 287,
+    LINE2 = 288,
+    LINE3 = 289,
+    LINE4 = 290,
+    DELETE = 291,
+    PAUSE = 292,
+    CLOCKWISE = 293,
+    ANTICLOCKWISE = 294,
+    UP = 295,
+    RIGHT = 296,
+    DOWN = 297,
+    LEFT = 298,
+    TRUE = 299,
+    FALSE = 300,
+    ID = 301,
+    NUM = 302,
+    KEY = 303,
+    SHAPE = 304,
+    PAUSE_BOOL = 305,
+    LOST = 306,
+    WIN = 307,
+    TIME = 308
+  };
 #endif
 /* Tokens.  */
 #define PLUS 258
@@ -105,67 +113,68 @@
 #define GT 265
 #define LE 266
 #define LT 267
-#define ASSIGN 268
-#define GRID 269
-#define START 270
-#define CONF 271
-#define NOT 272
-#define SCORE 273
-#define LINE1 274
-#define LINE2 275
-#define LINE3 276
-#define LINE4 277
-#define DELETE 278
-#define CLOCKWISE 279
-#define ANTICLOCKWISE 280
-#define PAUSE 281
-#define UP 282
-#define ENDIF 283
-#define IF 284
-#define THEN 285
-#define DO 286
-#define WHILE 287
-#define TRUE 288
-#define FALSE 289
-#define EOP 290
-#define T 291
-#define L 292
-#define ID 293
-#define NUM 294
-#define KEY 295
-#define SHAPE 296
-#define AND 297
-#define OR 298
-#define ENDWHILE 299
-#define TICK 300
-#define ENDTICK 301
-#define PAUSE_BOOL 302
-#define ELSE 303
-#define LOST 304
-#define WIN 305
-#define RIGHT 306
-#define DOWN 307
-#define LEFT 308
-#define TIME 309
-#define INIT 310
+#define AND 268
+#define OR 269
+#define NOT 270
+#define INIT 271
+#define ASSIGN 272
+#define IF 273
+#define THEN 274
+#define ELSE 275
+#define ENDIF 276
+#define DO 277
+#define WHILE 278
+#define ENDWHILE 279
+#define TICK 280
+#define ENDTICK 281
+#define EOP 282
+#define GRID 283
+#define START 284
+#define CONF 285
+#define SCORE 286
+#define LINE1 287
+#define LINE2 288
+#define LINE3 289
+#define LINE4 290
+#define DELETE 291
+#define PAUSE 292
+#define CLOCKWISE 293
+#define ANTICLOCKWISE 294
+#define UP 295
+#define RIGHT 296
+#define DOWN 297
+#define LEFT 298
+#define TRUE 299
+#define FALSE 300
+#define ID 301
+#define NUM 302
+#define KEY 303
+#define SHAPE 304
+#define PAUSE_BOOL 305
+#define LOST 306
+#define WIN 307
+#define TIME 308
 
-
-
-
+/* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
-#line 21 "tetris.y"
+union YYSTYPE
 {
+#line 21 "tetris.y"
+
 	int data_type;
 	char var_name[30];
-}
-/* Line 1529 of yacc.c.  */
-#line 164 "y.tab.h"
-	YYSTYPE;
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
-# define YYSTYPE_IS_DECLARED 1
+
+#line 168 "y.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
 #endif
+
 
 extern YYSTYPE yylval;
 
+int yyparse (void);
+
+#endif /* !YY_YY_Y_TAB_H_INCLUDED  */

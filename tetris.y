@@ -35,47 +35,25 @@
 %left MUL DIV 
 %left NOT
 
-%type<var_name>ID NUM
+%type<var_name>ID NUM KEY SHAPE
 
 %start grid
 
 /* Rule Section */
 %%
-grid:	 		GRID INIT NUM NUM {printf("");
-printf("#include <ctime>\n");
-printf("#include <curses.h>\n");
-printf("#include <unistd.h>\n");
-printf("#include <stdlib.h>\n");
-printf("#include <string.h>\n");
-printf("\n");
+grid:	 		GRID INIT NUM NUM {
+{printf("int grid_x = %s, grid_y = %s\n", $3, $4);}
+//printf("int rows=7, col=4;");
+//printf("vector<vector<int> > block(rows,vector<int>(col,0));");
+//printf("vector<int> v={2,3,1};");
+//printf("block.push_back(v)");
 
-printf("/ block layout is: {w-1,h-1}{x0,y0}{x1,y1}{x2,y2}{x3,y3} (two bits each)\n");
-printf("nt x = 431424, y = 598356, r = 427089, px = 247872, py = 799248, pr,\n");
-printf("   c = 348480, p = 615696, tick, board[%s][%s],\n", $3,$4);
-
-int rows, col;
-cin >> rows >> col;
-vector<vector<int> > block(rows,vector<int>(col,0));
-vector<int> v={2,3,1};
-block.push_back(v)
-block.resize(rows,vector<int>(col));
-printf("   block[7][4] = {{x, y, x, y},\n");
-printf("                  {r, p, r, p},\n");
-printf("                  {c, c, c, c},\n");
-printf("                  {599636, 431376, 598336, 432192},\n");
-printf("                  {411985, 610832, 415808, 595540},\n");
-printf("                  {px, py, px, py},\n");
-printf("                  {614928, 399424, 615744, 428369}},\n");
-printf("   score = 0;\n");
-printf("\n");
-printf("// extract a 2-bit number from a block entry\n");
-printf("int NUM(int x, int y) { return 3 & block[p][x] >> y; }\n");}
-				STATEMENTS EOP
+				}STATEMENTS EOP
 //    				| GRID INIT NUM NUM STATEMENTS error{yyerror("please enter '#'");}
 STATEMENTS: 		STATEMENTS  STATEMENT 
 	  			| ;
-STATEMENT: 		ID INIT NUM
-				| ID  ASSIGN A_EXPN 
+STATEMENT: 		ID INIT{printf("int %s = ", $1);} A_EXPN{printf(";\n");}
+				| ID ASSIGN{printf("%s = ", $1);} A_EXPN 
 				| IF_BLOCK ENDIF
 				| IF_BLOCK ELSE_BLOCK ENDIF
 				| DO STATEMENTS WHILE BOOL_RET ENDWHILE 
@@ -92,12 +70,12 @@ IF_BLOCK:		IF{printf("if(");}  BOOL_RET{printf(")\n");} THEN {printf("{");} STAT
 ELSE_BLOCK: 	  	ELSE{printf("else\n{");}  STATEMENTS
 
 A_EXPN: 		A_EXPN PLUS {printf("+");} A_EXPN
-				| A_EXPN MINUS  A_EXPN
-				| A_EXPN MUL  A_EXPN
-				| A_EXPN DIV  A_EXPN
+				| A_EXPN MINUS {printf("-");} A_EXPN
+				| A_EXPN MUL {printf("*");}  A_EXPN
+				| A_EXPN DIV {printf("/");} A_EXPN
 				| TERMINALS
-				| SCORE
-				| TIME
+				| SCORE{printf("score");}
+				| TIME{printf("time");}
 
 TERMINALS:		ID{printf("%s",$1);} 
 				| NUM{printf("$1");}
@@ -113,28 +91,56 @@ BOOL_RET: 		A_EXPN AND{printf("&&");}  A_EXPN
 				| A_EXPN EQ  {printf("==");} A_EXPN
 				| NOT  {printf("!");} A_EXPN 
 				| WIN  {printf("win");}| LOST {printf("lost");}| PAUSE_BOOL{printf("pause_bool");}
-				| TRUE {printf("true");} | FALSE{printf("false");}
 				| GRID {printf("grid[");} A_EXPN {printf("][");} A_EXPN {printf("]");}
+				| TRUE {printf("true");} | FALSE{printf("false");}
+			//@TODO collisions: out of border with other tetromino
 
-ST_STMENT: 		START INIT NUM NUM
-CONF_STMENT: 		CONF action KEY 
-action: 		UP | DOWN | LEFT | RIGHT 
-				| CLOCKWISE | ANTICLOCKWISE 
-				| PAUSE
+ST_STMENT: 		START INIT NUM NUM{printf("int start_x = %s, start_y = %s",$3, $4);}
 
-SCORE_STMENT: 		SCORE ASSIGN{printf("=");} NUM
-				| SCORE PLUS A_EXPN
-				| SCORE MINUS A_EXPN
+CONF_STMENT: 		CONF{
+			printf("void Game::trasformTetromino (int key) {\n");
+			printf("    switch (key) {\n");
+			} CONFS {printf("\n}}\n");}//@changed
+CONFS:			KEY {printf("case %s:\n", $1);} ACTION CONFS |; 
+ACTION: 		UP {
+			printf("            tetromino.moveUp();\n");
+			printf("            if (collideWithTetrominoes()) tetromino.moveDown();\n");
+			printf("            break;\n");}
+ 			| DOWN {
+			printf("            tetromino.moveDown();\n");
+			printf("            if (collideWithTetrominoes()) tetromino.moveUp();\n");
+			printf("            break;\n");}
+			| LEFT {
+			printf("            tetromino.moveLeft();\n");
+			printf("            if (collideWithTetrominoes()) tetromino.moveRight();\n");
+			printf("            break;\n");}
+			| RIGHT {
+			printf("            tetromino.moveRight();\n");
+			printf("            if (collideWithTetrominoes()) tetromino.moveLeft();\n");
+			printf("            break;\n");}
+			| CLOCKWISE{
+			printf("            tetromino.rotate();\n");
+			printf("            if (collideWithTetrominoes()) tetromino.rotate(true);\n");
+			printf("            break;\n");}
+			| ANTICLOCKWISE {
+			printf("            tetromino.rotate(true);\n");
+			printf("            if (collideWithTetrominoes()) tetromino.rotate();\n");
+			printf("            break;\n");}
+			| PAUSE{printf("PAUSE_BOOL = !PAUSE_BOOL");}
+
+SCORE_STMENT: 		SCORE{printf("score");} ASSIGN{printf("=");} NUM
+				| SCORE{printf("score");} PLUS A_EXPN
+				| SCORE{printf("score");} MINUS A_EXPN
 
 SHAPE_STMENT: 		SHAPE BOOL_RET 
 
 TIME_STMENT: 		TIME PLUS A_EXPN
 DELETE_STMENT: 		DELETE A_EXPN A_EXPN
 
-CUSTOM_SHAPE: 		LINE1 BOOL_RET BOOL_RET BOOL_RET BOOL_RET 
+CUSTOM_SHAPE: 		LINE1 {printf("temp_block[4][4] = ");} BOOL_RET {printf("? :");}BOOL_RET BOOL_RET BOOL_RET 
 				LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET 
 				LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET 
-				LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET 
+				LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET {printf("blocks.push_back()");}
 			
 
 %%
