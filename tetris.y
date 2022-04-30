@@ -42,18 +42,24 @@
 /* Rule Section */
 %%
 grid:	 		GRID INIT NUM NUM {
-{printf("int grid_x = %s, grid_y = %s\n", $3, $4);}
-//printf("int rows=7, col=4;");
-//printf("vector<vector<int> > block(rows,vector<int>(col,0));");
-//printf("vector<int> v={2,3,1};");
-//printf("block.push_back(v)");
+				{
+					printf("int grid_x = %s, grid_y = %s\n", $3, $4);}
+					//printf("int rows=7, col=4;");
+					//printf("vector<vector<int> > block(rows,vector<int>(col,0));");
+					//printf("vector<int> v={2,3,1};");
+					//printf("block.push_back(v)");
 
-				}STATEMENTS EOP
-//    				| GRID INIT NUM NUM STATEMENTS error{yyerror("please enter '#'");}
-STATEMENTS: 		STATEMENTS  STATEMENT 
-	  			| ;
-STATEMENT: 		ID INIT{printf("int %s = ", $1);} A_EXPN{printf(";\n");}
-				| ID ASSIGN{printf("%s = ", $1);} A_EXPN 
+				} STATEMENTS EOP
+				| GRID INIT NUM NUM STATEMENTS error{yyerror("please enter '#'");}
+
+STATEMENTS: 	STATEMENTS  STATEMENT | ;
+
+STATEMENT: 		ID INIT{
+					printf("int %s = ",$1);
+				} 
+				A_EXPN{
+					printf(";\n");
+				}
 				| IF_BLOCK ENDIF
 				| IF_BLOCK ELSE_BLOCK ENDIF
 				| DO STATEMENTS WHILE BOOL_RET ENDWHILE 
@@ -78,7 +84,7 @@ A_EXPN: 		A_EXPN PLUS {printf("+");} A_EXPN
 				| TIME{printf("time");}
 
 TERMINALS:		ID{printf("%s",$1);} 
-				| NUM{printf("$1");}
+				| NUM{printf("%s",$1);}
 
 
 BOOL_RET: 		A_EXPN AND{printf("&&");}  A_EXPN
