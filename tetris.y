@@ -73,7 +73,8 @@ STATEMENT: 		ID INIT{
 				| CUSTOM_SHAPE 
 
 IF_BLOCK:		IF{printf("if(");}  BOOL_RET{printf(")\n");} THEN {printf("{");} STATEMENTS {printf("}");}
-ELSE_BLOCK: 	  	ELSE{printf("else\n{");}  STATEMENTS
+
+ELSE_BLOCK: 	ELSE{printf("else\n{");}  STATEMENTS
 
 A_EXPN: 		A_EXPN PLUS {printf("+");} A_EXPN
 				| A_EXPN MINUS {printf("-");} A_EXPN
