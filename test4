@@ -1,0 +1,9 @@
+grid init 5 10
+one_more_thing init 0
+if 32>35
+then one_more_thing = one_more_thing+ 24
+    if not lost and time < 10
+    then score + 2 time +1
+    endif
+endif
+%

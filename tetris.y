@@ -55,6 +55,17 @@ grid:	 		GRID INIT NUM NUM {
 STATEMENTS: 	STATEMENTS  STATEMENT | ;
 
 STATEMENT: 		ID INIT{
+					insert_to_table($1,0);
+					printf("int %s = ",$1);
+				} 
+				A_EXPN{
+					printf(";\n");
+				}
+				|
+				ID ASSIGN{
+					if(lookup_in_table($1)==-1){
+						insert_to_table($1,0);
+					}
 					printf("int %s = ",$1);
 				} 
 				A_EXPN{
@@ -88,15 +99,15 @@ TERMINALS:		ID{printf("%s",$1);}
 				| NUM{printf("%s",$1);}
 
 
-BOOL_RET: 		A_EXPN AND{printf("&&");}  A_EXPN
-				| A_EXPN OR {printf("||");} A_EXPN
+BOOL_RET: 		BOOL_RET  AND{printf("&&");}  BOOL_RET
+				| BOOL_RET OR {printf("||");} BOOL_RET
 	 			| A_EXPN LE {printf("<=");} A_EXPN
 				| A_EXPN GE {printf(">=");} A_EXPN
 				| A_EXPN GT {printf(">");} A_EXPN
 				| A_EXPN LT {printf("<");} A_EXPN
 				| A_EXPN NOTEQUAL {printf("!=");} A_EXPN
 				| A_EXPN EQ  {printf("==");} A_EXPN
-				| NOT  {printf("!");} A_EXPN 
+				| NOT  {printf("!");} BOOL_RET 
 				| WIN  {printf("win");}| LOST {printf("lost");}| PAUSE_BOOL{printf("pause_bool");}
 				| GRID {printf("grid[");} A_EXPN {printf("][");} A_EXPN {printf("]");}
 				| TRUE {printf("true");} | FALSE{printf("false");}
@@ -135,7 +146,7 @@ ACTION: 		UP {
 			printf("            break;\n");}
 			| PAUSE{printf("PAUSE_BOOL = !PAUSE_BOOL");}
 
-SCORE_STMENT: 		SCORE{printf("score");} ASSIGN{printf("=");} NUM
+SCORE_STMENT: 		SCORE{printf("score");} ASSIGN{printf("=");} TERMINALS
 				| SCORE{printf("score");} PLUS A_EXPN
 				| SCORE{printf("score");} MINUS A_EXPN
 

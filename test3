@@ -1,0 +1,6 @@
+grid init 19 8
+score = 0
+do score + 2
+while not grid 5 3 
+endwhile
+% 
