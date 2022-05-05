@@ -1,365 +1,324 @@
+State 6 conflicts: 11 reduce/reduce
+
+
 Grammar
 
     0 $accept: grid $end
 
-    1 $@1: %empty
+    1 @1: /* empty */
 
-    2 grid: GRID INIT NUM NUM $@1 STATEMENTS EOP
+    2 grid: GRID INIT NUM NUM @1 STATEMENTS EOP
+    3     | GRID INIT NUM NUM STATEMENTS error
 
-    3 STATEMENTS: STATEMENTS STATEMENT
-    4           | %empty
+    4 STATEMENTS: STATEMENTS STATEMENT
+    5           | /* empty */
 
-    5 $@2: %empty
+    6 @2: /* empty */
 
-    6 STATEMENT: ID INIT $@2 A_EXPN
+    7 STATEMENT: ID INIT @2 A_EXPN
 
-    7 $@3: %empty
+    8 @3: /* empty */
 
-    8 STATEMENT: ID ASSIGN $@3 A_EXPN
-    9          | IF_BLOCK ENDIF
-   10          | IF_BLOCK ELSE_BLOCK ENDIF
-   11          | DO STATEMENTS WHILE BOOL_RET ENDWHILE
-   12          | TICK STATEMENTS ENDTICK
-   13          | CONF_STMENT
-   14          | ST_STMENT
-   15          | SCORE_STMENT
-   16          | SHAPE_STMENT
-   17          | TIME_STMENT
-   18          | DELETE_STMENT
-   19          | CUSTOM_SHAPE
+    9 STATEMENT: ID ASSIGN @3 A_EXPN
+   10          | IF_BLOCK ENDIF
+   11          | IF_BLOCK ELSE_BLOCK ENDIF
+   12          | DO STATEMENTS WHILE BOOL_RET ENDWHILE
+   13          | TICK STATEMENTS ENDTICK
+   14          | CONF_STMENT
+   15          | ST_STMENT
+   16          | SCORE_STMENT
+   17          | SHAPE_STMENT
+   18          | TIME_STMENT
+   19          | DELETE_STMENT
+   20          | CUSTOM_SHAPE
 
-   20 $@4: %empty
+   21 @4: /* empty */
 
-   21 $@5: %empty
+   22 @5: /* empty */
 
-   22 $@6: %empty
+   23 @6: /* empty */
 
-   23 IF_BLOCK: IF $@4 BOOL_RET $@5 THEN $@6 STATEMENTS
+   24 IF_BLOCK: IF @4 BOOL_RET @5 THEN @6 STATEMENTS
 
-   24 $@7: %empty
+   25 @7: /* empty */
 
-   25 ELSE_BLOCK: ELSE $@7 STATEMENTS
+   26 ELSE_BLOCK: ELSE @7 STATEMENTS
 
-   26 $@8: %empty
+   27 @8: /* empty */
 
-   27 A_EXPN: A_EXPN PLUS $@8 A_EXPN
+   28 A_EXPN: A_EXPN PLUS @8 A_EXPN
 
-   28 $@9: %empty
+   29 @9: /* empty */
 
-   29 A_EXPN: A_EXPN MINUS $@9 A_EXPN
+   30 A_EXPN: A_EXPN MINUS @9 A_EXPN
 
-   30 $@10: %empty
+   31 @10: /* empty */
 
-   31 A_EXPN: A_EXPN MUL $@10 A_EXPN
+   32 A_EXPN: A_EXPN MUL @10 A_EXPN
 
-   32 $@11: %empty
+   33 @11: /* empty */
 
-   33 A_EXPN: A_EXPN DIV $@11 A_EXPN
-   34       | TERMINALS
-   35       | SCORE
-   36       | TIME
+   34 A_EXPN: A_EXPN DIV @11 A_EXPN
+   35       | TERMINALS
+   36       | SCORE
+   37       | TIME
 
-   37 TERMINALS: ID
-   38          | NUM
+   38 TERMINALS: ID
+   39          | NUM
 
-   39 $@12: %empty
+   40 @12: /* empty */
 
-   40 BOOL_RET: A_EXPN AND $@12 A_EXPN
+   41 BOOL_RET: BOOL_RET AND @12 BOOL_RET
 
-   41 $@13: %empty
+   42 @13: /* empty */
 
-   42 BOOL_RET: A_EXPN OR $@13 A_EXPN
+   43 BOOL_RET: BOOL_RET OR @13 BOOL_RET
 
-   43 $@14: %empty
+   44 @14: /* empty */
 
-   44 BOOL_RET: A_EXPN LE $@14 A_EXPN
+   45 BOOL_RET: A_EXPN LE @14 A_EXPN
 
-   45 $@15: %empty
+   46 @15: /* empty */
 
-   46 BOOL_RET: A_EXPN GE $@15 A_EXPN
+   47 BOOL_RET: A_EXPN GE @15 A_EXPN
 
-   47 $@16: %empty
+   48 @16: /* empty */
 
-   48 BOOL_RET: A_EXPN GT $@16 A_EXPN
+   49 BOOL_RET: A_EXPN GT @16 A_EXPN
 
-   49 $@17: %empty
+   50 @17: /* empty */
 
-   50 BOOL_RET: A_EXPN LT $@17 A_EXPN
+   51 BOOL_RET: A_EXPN LT @17 A_EXPN
 
-   51 $@18: %empty
+   52 @18: /* empty */
 
-   52 BOOL_RET: A_EXPN NOTEQUAL $@18 A_EXPN
+   53 BOOL_RET: A_EXPN NOTEQUAL @18 A_EXPN
 
-   53 $@19: %empty
+   54 @19: /* empty */
 
-   54 BOOL_RET: A_EXPN EQ $@19 A_EXPN
+   55 BOOL_RET: A_EXPN EQ @19 A_EXPN
 
-   55 $@20: %empty
+   56 @20: /* empty */
 
-   56 BOOL_RET: NOT $@20 A_EXPN
-   57         | WIN
-   58         | LOST
-   59         | PAUSE_BOOL
+   57 BOOL_RET: NOT @20 BOOL_RET
+   58         | WIN
+   59         | LOST
+   60         | PAUSE_BOOL
 
-   60 $@21: %empty
+   61 @21: /* empty */
 
-   61 $@22: %empty
+   62 @22: /* empty */
 
-   62 BOOL_RET: GRID $@21 A_EXPN $@22 A_EXPN
-   63         | TRUE
-   64         | FALSE
+   63 BOOL_RET: GRID @21 A_EXPN @22 A_EXPN
+   64         | TRUE
+   65         | FALSE
 
-   65 ST_STMENT: START INIT NUM NUM
+   66 ST_STMENT: START INIT NUM NUM
 
-   66 $@23: %empty
+   67 @23: /* empty */
 
-   67 CONF_STMENT: CONF $@23 CONFS
+   68 CONF_STMENT: CONF @23 CONFS
 
-   68 $@24: %empty
+   69 @24: /* empty */
 
-   69 CONFS: KEY $@24 ACTION CONFS
-   70      | %empty
+   70 CONFS: KEY @24 ACTION CONFS
+   71      | /* empty */
 
-   71 ACTION: UP
-   72       | DOWN
-   73       | LEFT
-   74       | RIGHT
-   75       | CLOCKWISE
-   76       | ANTICLOCKWISE
-   77       | PAUSE
+   72 ACTION: UP
+   73       | DOWN
+   74       | LEFT
+   75       | RIGHT
+   76       | CLOCKWISE
+   77       | ANTICLOCKWISE
+   78       | PAUSE
 
-   78 $@25: %empty
+   79 @25: /* empty */
 
-   79 $@26: %empty
+   80 @26: /* empty */
 
-   80 SCORE_STMENT: SCORE $@25 ASSIGN $@26 NUM
+   81 SCORE_STMENT: SCORE @25 ASSIGN @26 TERMINALS
 
-   81 $@27: %empty
+   82 @27: /* empty */
 
-   82 SCORE_STMENT: SCORE $@27 PLUS A_EXPN
+   83 SCORE_STMENT: SCORE @27 PLUS A_EXPN
 
-   83 $@28: %empty
+   84 @28: /* empty */
 
-   84 SCORE_STMENT: SCORE $@28 MINUS A_EXPN
+   85 SCORE_STMENT: SCORE @28 MINUS A_EXPN
 
-   85 SHAPE_STMENT: SHAPE BOOL_RET
+   86 SHAPE_STMENT: SHAPE BOOL_RET
 
-   86 TIME_STMENT: TIME PLUS A_EXPN
+   87 TIME_STMENT: TIME PLUS A_EXPN
 
-   87 DELETE_STMENT: DELETE A_EXPN A_EXPN
+   88 DELETE_STMENT: DELETE A_EXPN A_EXPN
 
-   88 $@29: %empty
+   89 @29: /* empty */
 
-   89 $@30: %empty
+   90 @30: /* empty */
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
 
 Terminals, with rules where they appear
 
-    $end (0) 0
-    error (256)
-    PLUS (258) 27 82 86
-    MINUS (259) 29 84
-    MUL (260) 31
-    DIV (261) 33
-    EQ (262) 54
-    NOTEQUAL (263) 52
-    GE (264) 46
-    GT (265) 48
-    LE (266) 44
-    LT (267) 50
-    AND (268) 40
-    OR (269) 42
-    NOT (270) 56
-    INIT (271) 2 6 65
-    ASSIGN (272) 8 80
-    IF (273) 23
-    THEN (274) 23
-    ELSE (275) 25
-    ENDIF (276) 9 10
-    DO (277) 11
-    WHILE (278) 11
-    ENDWHILE (279) 11
-    TICK (280) 12
-    ENDTICK (281) 12
-    EOP (282) 2
-    GRID (283) 2 62
-    START (284) 65
-    CONF (285) 67
-    SCORE (286) 35 80 82 84
-    LINE1 (287) 90
-    LINE2 (288) 90
-    LINE3 (289) 90
-    LINE4 (290) 90
-    DELETE (291) 87
-    PAUSE (292) 77
-    CLOCKWISE (293) 75
-    ANTICLOCKWISE (294) 76
-    UP (295) 71
-    RIGHT (296) 74
-    DOWN (297) 72
-    LEFT (298) 73
-    TRUE (299) 63
-    FALSE (300) 64
-    ID <var_name> (301) 6 8 37
-    NUM <var_name> (302) 2 38 65 80
-    KEY <var_name> (303) 69
-    SHAPE <var_name> (304) 85
-    PAUSE_BOOL (305) 59
-    LOST (306) 58
-    WIN (307) 57
-    TIME (308) 36 86
+$end (0) 0
+error (256) 3
+PLUS (258) 28 83 87
+MINUS (259) 30 85
+MUL (260) 32
+DIV (261) 34
+EQ (262) 55
+NOTEQUAL (263) 53
+GE (264) 47
+GT (265) 49
+LE (266) 45
+LT (267) 51
+AND (268) 41
+OR (269) 43
+NOT (270) 57
+INIT (271) 2 3 7 66
+ASSIGN (272) 9 81
+IF (273) 24
+THEN (274) 24
+ELSE (275) 26
+ENDIF (276) 10 11
+DO (277) 12
+WHILE (278) 12
+ENDWHILE (279) 12
+TICK (280) 13
+ENDTICK (281) 13
+EOP (282) 2
+GRID (283) 2 3 63
+START (284) 66
+CONF (285) 68
+SCORE (286) 36 81 83 85
+LINE1 (287) 91
+LINE2 (288) 91
+LINE3 (289) 91
+LINE4 (290) 91
+DELETE (291) 88
+PAUSE (292) 78
+CLOCKWISE (293) 76
+ANTICLOCKWISE (294) 77
+UP (295) 72
+RIGHT (296) 75
+DOWN (297) 73
+LEFT (298) 74
+TRUE (299) 64
+FALSE (300) 65
+ID (301) 7 9 38
+NUM (302) 2 3 39 66
+KEY (303) 70
+SHAPE (304) 86
+PAUSE_BOOL (305) 60
+LOST (306) 59
+WIN (307) 58
+TIME (308) 37 87
 
 
 Nonterminals, with rules where they appear
 
-    $accept (54)
-        on left: 0
-    grid (55)
-        on left: 2
-        on right: 0
-    $@1 (56)
-        on left: 1
-        on right: 2
-    STATEMENTS (57)
-        on left: 3 4
-        on right: 2 3 11 12 23 25
-    STATEMENT (58)
-        on left: 6 8 9 10 11 12 13 14 15 16 17 18 19
-        on right: 3
-    $@2 (59)
-        on left: 5
-        on right: 6
-    $@3 (60)
-        on left: 7
-        on right: 8
-    IF_BLOCK (61)
-        on left: 23
-        on right: 9 10
-    $@4 (62)
-        on left: 20
-        on right: 23
-    $@5 (63)
-        on left: 21
-        on right: 23
-    $@6 (64)
-        on left: 22
-        on right: 23
-    ELSE_BLOCK (65)
-        on left: 25
-        on right: 10
-    $@7 (66)
-        on left: 24
-        on right: 25
-    A_EXPN (67)
-        on left: 27 29 31 33 34 35 36
-        on right: 6 8 27 29 31 33 40 42 44 46 48 50 52 54 56 62 82 84 86 87
-    $@8 (68)
-        on left: 26
-        on right: 27
-    $@9 (69)
-        on left: 28
-        on right: 29
-    $@10 (70)
-        on left: 30
-        on right: 31
-    $@11 (71)
-        on left: 32
-        on right: 33
-    TERMINALS (72)
-        on left: 37 38
-        on right: 34
-    BOOL_RET (73)
-        on left: 40 42 44 46 48 50 52 54 56 57 58 59 62 63 64
-        on right: 11 23 85 90
-    $@12 (74)
-        on left: 39
-        on right: 40
-    $@13 (75)
-        on left: 41
-        on right: 42
-    $@14 (76)
-        on left: 43
-        on right: 44
-    $@15 (77)
-        on left: 45
-        on right: 46
-    $@16 (78)
-        on left: 47
-        on right: 48
-    $@17 (79)
-        on left: 49
-        on right: 50
-    $@18 (80)
-        on left: 51
-        on right: 52
-    $@19 (81)
-        on left: 53
-        on right: 54
-    $@20 (82)
-        on left: 55
-        on right: 56
-    $@21 (83)
-        on left: 60
-        on right: 62
-    $@22 (84)
-        on left: 61
-        on right: 62
-    ST_STMENT (85)
-        on left: 65
-        on right: 14
-    CONF_STMENT (86)
-        on left: 67
-        on right: 13
-    $@23 (87)
-        on left: 66
-        on right: 67
-    CONFS (88)
-        on left: 69 70
-        on right: 67 69
-    $@24 (89)
-        on left: 68
-        on right: 69
-    ACTION (90)
-        on left: 71 72 73 74 75 76 77
-        on right: 69
-    SCORE_STMENT (91)
-        on left: 80 82 84
-        on right: 15
-    $@25 (92)
-        on left: 78
-        on right: 80
-    $@26 (93)
-        on left: 79
-        on right: 80
-    $@27 (94)
-        on left: 81
-        on right: 82
-    $@28 (95)
-        on left: 83
-        on right: 84
-    SHAPE_STMENT (96)
-        on left: 85
-        on right: 16
-    TIME_STMENT (97)
-        on left: 86
-        on right: 17
-    DELETE_STMENT (98)
-        on left: 87
-        on right: 18
-    CUSTOM_SHAPE (99)
-        on left: 90
-        on right: 19
-    $@29 (100)
-        on left: 88
-        on right: 90
-    $@30 (101)
-        on left: 89
-        on right: 90
+$accept (54)
+    on left: 0
+grid (55)
+    on left: 2 3, on right: 0
+@1 (56)
+    on left: 1, on right: 2
+STATEMENTS (57)
+    on left: 4 5, on right: 2 3 4 12 13 24 26
+STATEMENT (58)
+    on left: 7 9 10 11 12 13 14 15 16 17 18 19 20, on right: 4
+@2 (59)
+    on left: 6, on right: 7
+@3 (60)
+    on left: 8, on right: 9
+IF_BLOCK (61)
+    on left: 24, on right: 10 11
+@4 (62)
+    on left: 21, on right: 24
+@5 (63)
+    on left: 22, on right: 24
+@6 (64)
+    on left: 23, on right: 24
+ELSE_BLOCK (65)
+    on left: 26, on right: 11
+@7 (66)
+    on left: 25, on right: 26
+A_EXPN (67)
+    on left: 28 30 32 34 35 36 37, on right: 7 9 28 30 32 34 45 47
+    49 51 53 55 63 83 85 87 88
+@8 (68)
+    on left: 27, on right: 28
+@9 (69)
+    on left: 29, on right: 30
+@10 (70)
+    on left: 31, on right: 32
+@11 (71)
+    on left: 33, on right: 34
+TERMINALS (72)
+    on left: 38 39, on right: 35 81
+BOOL_RET (73)
+    on left: 41 43 45 47 49 51 53 55 57 58 59 60 63 64 65,
+    on right: 12 24 41 43 57 86 91
+@12 (74)
+    on left: 40, on right: 41
+@13 (75)
+    on left: 42, on right: 43
+@14 (76)
+    on left: 44, on right: 45
+@15 (77)
+    on left: 46, on right: 47
+@16 (78)
+    on left: 48, on right: 49
+@17 (79)
+    on left: 50, on right: 51
+@18 (80)
+    on left: 52, on right: 53
+@19 (81)
+    on left: 54, on right: 55
+@20 (82)
+    on left: 56, on right: 57
+@21 (83)
+    on left: 61, on right: 63
+@22 (84)
+    on left: 62, on right: 63
+ST_STMENT (85)
+    on left: 66, on right: 15
+CONF_STMENT (86)
+    on left: 68, on right: 14
+@23 (87)
+    on left: 67, on right: 68
+CONFS (88)
+    on left: 70 71, on right: 68 70
+@24 (89)
+    on left: 69, on right: 70
+ACTION (90)
+    on left: 72 73 74 75 76 77 78, on right: 70
+SCORE_STMENT (91)
+    on left: 81 83 85, on right: 16
+@25 (92)
+    on left: 79, on right: 81
+@26 (93)
+    on left: 80, on right: 81
+@27 (94)
+    on left: 82, on right: 83
+@28 (95)
+    on left: 84, on right: 85
+SHAPE_STMENT (96)
+    on left: 86, on right: 17
+TIME_STMENT (97)
+    on left: 87, on right: 18
+DELETE_STMENT (98)
+    on left: 88, on right: 19
+CUSTOM_SHAPE (99)
+    on left: 91, on right: 20
+@29 (100)
+    on left: 89, on right: 91
+@30 (101)
+    on left: 90, on right: 91
 
 
-State 0
+state 0
 
     0 $accept: . grid $end
 
@@ -368,1930 +327,2078 @@ State 0
     grid  go to state 2
 
 
-State 1
+state 1
 
-    2 grid: GRID . INIT NUM NUM $@1 STATEMENTS EOP
+    2 grid: GRID . INIT NUM NUM @1 STATEMENTS EOP
+    3     | GRID . INIT NUM NUM STATEMENTS error
 
     INIT  shift, and go to state 3
 
 
-State 2
+state 2
 
     0 $accept: grid . $end
 
     $end  shift, and go to state 4
 
 
-State 3
+state 3
 
-    2 grid: GRID INIT . NUM NUM $@1 STATEMENTS EOP
+    2 grid: GRID INIT . NUM NUM @1 STATEMENTS EOP
+    3     | GRID INIT . NUM NUM STATEMENTS error
 
     NUM  shift, and go to state 5
 
 
-State 4
+state 4
 
     0 $accept: grid $end .
 
     $default  accept
 
 
-State 5
+state 5
 
-    2 grid: GRID INIT NUM . NUM $@1 STATEMENTS EOP
+    2 grid: GRID INIT NUM . NUM @1 STATEMENTS EOP
+    3     | GRID INIT NUM . NUM STATEMENTS error
 
     NUM  shift, and go to state 6
 
 
-State 6
+state 6
 
-    2 grid: GRID INIT NUM NUM . $@1 STATEMENTS EOP
+    2 grid: GRID INIT NUM NUM . @1 STATEMENTS EOP
+    3     | GRID INIT NUM NUM . STATEMENTS error
 
-    $default  reduce using rule 1 ($@1)
+    error     reduce using rule 5 (STATEMENTS)
+    IF        reduce using rule 1 (@1)
+    IF        [reduce using rule 5 (STATEMENTS)]
+    DO        reduce using rule 1 (@1)
+    DO        [reduce using rule 5 (STATEMENTS)]
+    TICK      reduce using rule 1 (@1)
+    TICK      [reduce using rule 5 (STATEMENTS)]
+    START     reduce using rule 1 (@1)
+    START     [reduce using rule 5 (STATEMENTS)]
+    CONF      reduce using rule 1 (@1)
+    CONF      [reduce using rule 5 (STATEMENTS)]
+    SCORE     reduce using rule 1 (@1)
+    SCORE     [reduce using rule 5 (STATEMENTS)]
+    LINE1     reduce using rule 1 (@1)
+    LINE1     [reduce using rule 5 (STATEMENTS)]
+    DELETE    reduce using rule 1 (@1)
+    DELETE    [reduce using rule 5 (STATEMENTS)]
+    ID        reduce using rule 1 (@1)
+    ID        [reduce using rule 5 (STATEMENTS)]
+    SHAPE     reduce using rule 1 (@1)
+    SHAPE     [reduce using rule 5 (STATEMENTS)]
+    TIME      reduce using rule 1 (@1)
+    TIME      [reduce using rule 5 (STATEMENTS)]
+    $default  reduce using rule 1 (@1)
 
-    $@1  go to state 7
-
-
-State 7
-
-    2 grid: GRID INIT NUM NUM $@1 . STATEMENTS EOP
-
-    $default  reduce using rule 4 (STATEMENTS)
-
+    @1          go to state 7
     STATEMENTS  go to state 8
 
 
-State 8
+state 7
 
-    2 grid: GRID INIT NUM NUM $@1 STATEMENTS . EOP
-    3 STATEMENTS: STATEMENTS . STATEMENT
+    2 grid: GRID INIT NUM NUM @1 . STATEMENTS EOP
 
-    IF      shift, and go to state 9
-    DO      shift, and go to state 10
-    TICK    shift, and go to state 11
-    EOP     shift, and go to state 12
-    START   shift, and go to state 13
-    CONF    shift, and go to state 14
-    SCORE   shift, and go to state 15
-    LINE1   shift, and go to state 16
-    DELETE  shift, and go to state 17
-    ID      shift, and go to state 18
-    SHAPE   shift, and go to state 19
-    TIME    shift, and go to state 20
+    $default  reduce using rule 5 (STATEMENTS)
 
-    STATEMENT      go to state 21
-    IF_BLOCK       go to state 22
-    ST_STMENT      go to state 23
-    CONF_STMENT    go to state 24
-    SCORE_STMENT   go to state 25
-    SHAPE_STMENT   go to state 26
-    TIME_STMENT    go to state 27
-    DELETE_STMENT  go to state 28
-    CUSTOM_SHAPE   go to state 29
+    STATEMENTS  go to state 9
 
 
-State 9
+state 8
 
-   23 IF_BLOCK: IF . $@4 BOOL_RET $@5 THEN $@6 STATEMENTS
+    3 grid: GRID INIT NUM NUM STATEMENTS . error
+    4 STATEMENTS: STATEMENTS . STATEMENT
 
-    $default  reduce using rule 20 ($@4)
+    error   shift, and go to state 10
+    IF      shift, and go to state 11
+    DO      shift, and go to state 12
+    TICK    shift, and go to state 13
+    START   shift, and go to state 14
+    CONF    shift, and go to state 15
+    SCORE   shift, and go to state 16
+    LINE1   shift, and go to state 17
+    DELETE  shift, and go to state 18
+    ID      shift, and go to state 19
+    SHAPE   shift, and go to state 20
+    TIME    shift, and go to state 21
 
-    $@4  go to state 30
+    STATEMENT      go to state 22
+    IF_BLOCK       go to state 23
+    ST_STMENT      go to state 24
+    CONF_STMENT    go to state 25
+    SCORE_STMENT   go to state 26
+    SHAPE_STMENT   go to state 27
+    TIME_STMENT    go to state 28
+    DELETE_STMENT  go to state 29
+    CUSTOM_SHAPE   go to state 30
 
 
-State 10
+state 9
 
-   11 STATEMENT: DO . STATEMENTS WHILE BOOL_RET ENDWHILE
+    2 grid: GRID INIT NUM NUM @1 STATEMENTS . EOP
+    4 STATEMENTS: STATEMENTS . STATEMENT
+
+    IF      shift, and go to state 11
+    DO      shift, and go to state 12
+    TICK    shift, and go to state 13
+    EOP     shift, and go to state 31
+    START   shift, and go to state 14
+    CONF    shift, and go to state 15
+    SCORE   shift, and go to state 16
+    LINE1   shift, and go to state 17
+    DELETE  shift, and go to state 18
+    ID      shift, and go to state 19
+    SHAPE   shift, and go to state 20
+    TIME    shift, and go to state 21
+
+    STATEMENT      go to state 22
+    IF_BLOCK       go to state 23
+    ST_STMENT      go to state 24
+    CONF_STMENT    go to state 25
+    SCORE_STMENT   go to state 26
+    SHAPE_STMENT   go to state 27
+    TIME_STMENT    go to state 28
+    DELETE_STMENT  go to state 29
+    CUSTOM_SHAPE   go to state 30
+
+
+state 10
+
+    3 grid: GRID INIT NUM NUM STATEMENTS error .
+
+    $default  reduce using rule 3 (grid)
+
+
+state 11
+
+   24 IF_BLOCK: IF . @4 BOOL_RET @5 THEN @6 STATEMENTS
+
+    $default  reduce using rule 21 (@4)
+
+    @4  go to state 32
+
+
+state 12
+
+   12 STATEMENT: DO . STATEMENTS WHILE BOOL_RET ENDWHILE
+
+    $default  reduce using rule 5 (STATEMENTS)
+
+    STATEMENTS  go to state 33
+
+
+state 13
+
+   13 STATEMENT: TICK . STATEMENTS ENDTICK
+
+    $default  reduce using rule 5 (STATEMENTS)
+
+    STATEMENTS  go to state 34
+
+
+state 14
+
+   66 ST_STMENT: START . INIT NUM NUM
+
+    INIT  shift, and go to state 35
+
+
+state 15
+
+   68 CONF_STMENT: CONF . @23 CONFS
+
+    $default  reduce using rule 67 (@23)
+
+    @23  go to state 36
+
+
+state 16
+
+   81 SCORE_STMENT: SCORE . @25 ASSIGN @26 TERMINALS
+   83             | SCORE . @27 PLUS A_EXPN
+   85             | SCORE . @28 MINUS A_EXPN
+
+    PLUS      reduce using rule 82 (@27)
+    MINUS     reduce using rule 84 (@28)
+    $default  reduce using rule 79 (@25)
+
+    @25  go to state 37
+    @27  go to state 38
+    @28  go to state 39
+
+
+state 17
+
+   91 CUSTOM_SHAPE: LINE1 . @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+
+    $default  reduce using rule 89 (@29)
+
+    @29  go to state 40
+
+
+state 18
+
+   88 DELETE_STMENT: DELETE . A_EXPN A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 45
+    TERMINALS  go to state 46
+
+
+state 19
+
+    7 STATEMENT: ID . INIT @2 A_EXPN
+    9          | ID . ASSIGN @3 A_EXPN
+
+    INIT    shift, and go to state 47
+    ASSIGN  shift, and go to state 48
+
+
+state 20
+
+   86 SHAPE_STMENT: SHAPE . BOOL_RET
+
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 57
+
+
+state 21
+
+   87 TIME_STMENT: TIME . PLUS A_EXPN
+
+    PLUS  shift, and go to state 58
+
+
+state 22
+
+    4 STATEMENTS: STATEMENTS STATEMENT .
 
     $default  reduce using rule 4 (STATEMENTS)
 
-    STATEMENTS  go to state 31
 
+state 23
 
-State 11
+   10 STATEMENT: IF_BLOCK . ENDIF
+   11          | IF_BLOCK . ELSE_BLOCK ENDIF
 
-   12 STATEMENT: TICK . STATEMENTS ENDTICK
+    ELSE   shift, and go to state 59
+    ENDIF  shift, and go to state 60
 
-    $default  reduce using rule 4 (STATEMENTS)
+    ELSE_BLOCK  go to state 61
 
-    STATEMENTS  go to state 32
 
+state 24
 
-State 12
-
-    2 grid: GRID INIT NUM NUM $@1 STATEMENTS EOP .
-
-    $default  reduce using rule 2 (grid)
-
-
-State 13
-
-   65 ST_STMENT: START . INIT NUM NUM
-
-    INIT  shift, and go to state 33
-
-
-State 14
-
-   67 CONF_STMENT: CONF . $@23 CONFS
-
-    $default  reduce using rule 66 ($@23)
-
-    $@23  go to state 34
-
-
-State 15
-
-   80 SCORE_STMENT: SCORE . $@25 ASSIGN $@26 NUM
-   82             | SCORE . $@27 PLUS A_EXPN
-   84             | SCORE . $@28 MINUS A_EXPN
-
-    PLUS      reduce using rule 81 ($@27)
-    MINUS     reduce using rule 83 ($@28)
-    $default  reduce using rule 78 ($@25)
-
-    $@25  go to state 35
-    $@27  go to state 36
-    $@28  go to state 37
-
-
-State 16
-
-   90 CUSTOM_SHAPE: LINE1 . $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
-
-    $default  reduce using rule 88 ($@29)
-
-    $@29  go to state 38
-
-
-State 17
-
-   87 DELETE_STMENT: DELETE . A_EXPN A_EXPN
-
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
-
-    A_EXPN     go to state 43
-    TERMINALS  go to state 44
-
-
-State 18
-
-    6 STATEMENT: ID . INIT $@2 A_EXPN
-    8          | ID . ASSIGN $@3 A_EXPN
-
-    INIT    shift, and go to state 45
-    ASSIGN  shift, and go to state 46
-
-
-State 19
-
-   85 SHAPE_STMENT: SHAPE . BOOL_RET
-
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
-
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
-    BOOL_RET   go to state 55
-
-
-State 20
-
-   86 TIME_STMENT: TIME . PLUS A_EXPN
-
-    PLUS  shift, and go to state 56
-
-
-State 21
-
-    3 STATEMENTS: STATEMENTS STATEMENT .
-
-    $default  reduce using rule 3 (STATEMENTS)
-
-
-State 22
-
-    9 STATEMENT: IF_BLOCK . ENDIF
-   10          | IF_BLOCK . ELSE_BLOCK ENDIF
-
-    ELSE   shift, and go to state 57
-    ENDIF  shift, and go to state 58
-
-    ELSE_BLOCK  go to state 59
-
-
-State 23
-
-   14 STATEMENT: ST_STMENT .
-
-    $default  reduce using rule 14 (STATEMENT)
-
-
-State 24
-
-   13 STATEMENT: CONF_STMENT .
-
-    $default  reduce using rule 13 (STATEMENT)
-
-
-State 25
-
-   15 STATEMENT: SCORE_STMENT .
+   15 STATEMENT: ST_STMENT .
 
     $default  reduce using rule 15 (STATEMENT)
 
 
-State 26
+state 25
 
-   16 STATEMENT: SHAPE_STMENT .
+   14 STATEMENT: CONF_STMENT .
+
+    $default  reduce using rule 14 (STATEMENT)
+
+
+state 26
+
+   16 STATEMENT: SCORE_STMENT .
 
     $default  reduce using rule 16 (STATEMENT)
 
 
-State 27
+state 27
 
-   17 STATEMENT: TIME_STMENT .
+   17 STATEMENT: SHAPE_STMENT .
 
     $default  reduce using rule 17 (STATEMENT)
 
 
-State 28
+state 28
 
-   18 STATEMENT: DELETE_STMENT .
+   18 STATEMENT: TIME_STMENT .
 
     $default  reduce using rule 18 (STATEMENT)
 
 
-State 29
+state 29
 
-   19 STATEMENT: CUSTOM_SHAPE .
+   19 STATEMENT: DELETE_STMENT .
 
     $default  reduce using rule 19 (STATEMENT)
 
 
-State 30
+state 30
 
-   23 IF_BLOCK: IF $@4 . BOOL_RET $@5 THEN $@6 STATEMENTS
+   20 STATEMENT: CUSTOM_SHAPE .
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
-
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
-    BOOL_RET   go to state 60
+    $default  reduce using rule 20 (STATEMENT)
 
 
-State 31
+state 31
 
-    3 STATEMENTS: STATEMENTS . STATEMENT
-   11 STATEMENT: DO STATEMENTS . WHILE BOOL_RET ENDWHILE
+    2 grid: GRID INIT NUM NUM @1 STATEMENTS EOP .
 
-    IF      shift, and go to state 9
-    DO      shift, and go to state 10
-    WHILE   shift, and go to state 61
-    TICK    shift, and go to state 11
-    START   shift, and go to state 13
-    CONF    shift, and go to state 14
-    SCORE   shift, and go to state 15
-    LINE1   shift, and go to state 16
-    DELETE  shift, and go to state 17
-    ID      shift, and go to state 18
-    SHAPE   shift, and go to state 19
-    TIME    shift, and go to state 20
-
-    STATEMENT      go to state 21
-    IF_BLOCK       go to state 22
-    ST_STMENT      go to state 23
-    CONF_STMENT    go to state 24
-    SCORE_STMENT   go to state 25
-    SHAPE_STMENT   go to state 26
-    TIME_STMENT    go to state 27
-    DELETE_STMENT  go to state 28
-    CUSTOM_SHAPE   go to state 29
+    $default  reduce using rule 2 (grid)
 
 
-State 32
+state 32
 
-    3 STATEMENTS: STATEMENTS . STATEMENT
-   12 STATEMENT: TICK STATEMENTS . ENDTICK
+   24 IF_BLOCK: IF @4 . BOOL_RET @5 THEN @6 STATEMENTS
 
-    IF       shift, and go to state 9
-    DO       shift, and go to state 10
-    TICK     shift, and go to state 11
-    ENDTICK  shift, and go to state 62
-    START    shift, and go to state 13
-    CONF     shift, and go to state 14
-    SCORE    shift, and go to state 15
-    LINE1    shift, and go to state 16
-    DELETE   shift, and go to state 17
-    ID       shift, and go to state 18
-    SHAPE    shift, and go to state 19
-    TIME     shift, and go to state 20
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
 
-    STATEMENT      go to state 21
-    IF_BLOCK       go to state 22
-    ST_STMENT      go to state 23
-    CONF_STMENT    go to state 24
-    SCORE_STMENT   go to state 25
-    SHAPE_STMENT   go to state 26
-    TIME_STMENT    go to state 27
-    DELETE_STMENT  go to state 28
-    CUSTOM_SHAPE   go to state 29
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 62
 
 
-State 33
+state 33
 
-   65 ST_STMENT: START INIT . NUM NUM
+    4 STATEMENTS: STATEMENTS . STATEMENT
+   12 STATEMENT: DO STATEMENTS . WHILE BOOL_RET ENDWHILE
 
-    NUM  shift, and go to state 63
+    IF      shift, and go to state 11
+    DO      shift, and go to state 12
+    WHILE   shift, and go to state 63
+    TICK    shift, and go to state 13
+    START   shift, and go to state 14
+    CONF    shift, and go to state 15
+    SCORE   shift, and go to state 16
+    LINE1   shift, and go to state 17
+    DELETE  shift, and go to state 18
+    ID      shift, and go to state 19
+    SHAPE   shift, and go to state 20
+    TIME    shift, and go to state 21
 
-
-State 34
-
-   67 CONF_STMENT: CONF $@23 . CONFS
-
-    KEY  shift, and go to state 64
-
-    $default  reduce using rule 70 (CONFS)
-
-    CONFS  go to state 65
-
-
-State 35
-
-   80 SCORE_STMENT: SCORE $@25 . ASSIGN $@26 NUM
-
-    ASSIGN  shift, and go to state 66
-
-
-State 36
-
-   82 SCORE_STMENT: SCORE $@27 . PLUS A_EXPN
-
-    PLUS  shift, and go to state 67
+    STATEMENT      go to state 22
+    IF_BLOCK       go to state 23
+    ST_STMENT      go to state 24
+    CONF_STMENT    go to state 25
+    SCORE_STMENT   go to state 26
+    SHAPE_STMENT   go to state 27
+    TIME_STMENT    go to state 28
+    DELETE_STMENT  go to state 29
+    CUSTOM_SHAPE   go to state 30
 
 
-State 37
+state 34
 
-   84 SCORE_STMENT: SCORE $@28 . MINUS A_EXPN
+    4 STATEMENTS: STATEMENTS . STATEMENT
+   13 STATEMENT: TICK STATEMENTS . ENDTICK
 
-    MINUS  shift, and go to state 68
+    IF       shift, and go to state 11
+    DO       shift, and go to state 12
+    TICK     shift, and go to state 13
+    ENDTICK  shift, and go to state 64
+    START    shift, and go to state 14
+    CONF     shift, and go to state 15
+    SCORE    shift, and go to state 16
+    LINE1    shift, and go to state 17
+    DELETE   shift, and go to state 18
+    ID       shift, and go to state 19
+    SHAPE    shift, and go to state 20
+    TIME     shift, and go to state 21
 
-
-State 38
-
-   90 CUSTOM_SHAPE: LINE1 $@29 . BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
-
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
-
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
-    BOOL_RET   go to state 69
-
-
-State 39
-
-   35 A_EXPN: SCORE .
-
-    $default  reduce using rule 35 (A_EXPN)
+    STATEMENT      go to state 22
+    IF_BLOCK       go to state 23
+    ST_STMENT      go to state 24
+    CONF_STMENT    go to state 25
+    SCORE_STMENT   go to state 26
+    SHAPE_STMENT   go to state 27
+    TIME_STMENT    go to state 28
+    DELETE_STMENT  go to state 29
+    CUSTOM_SHAPE   go to state 30
 
 
-State 40
+state 35
 
-   37 TERMINALS: ID .
+   66 ST_STMENT: START INIT . NUM NUM
 
-    $default  reduce using rule 37 (TERMINALS)
-
-
-State 41
-
-   38 TERMINALS: NUM .
-
-    $default  reduce using rule 38 (TERMINALS)
+    NUM  shift, and go to state 65
 
 
-State 42
+state 36
 
-   36 A_EXPN: TIME .
+   68 CONF_STMENT: CONF @23 . CONFS
+
+    KEY  shift, and go to state 66
+
+    $default  reduce using rule 71 (CONFS)
+
+    CONFS  go to state 67
+
+
+state 37
+
+   81 SCORE_STMENT: SCORE @25 . ASSIGN @26 TERMINALS
+
+    ASSIGN  shift, and go to state 68
+
+
+state 38
+
+   83 SCORE_STMENT: SCORE @27 . PLUS A_EXPN
+
+    PLUS  shift, and go to state 69
+
+
+state 39
+
+   85 SCORE_STMENT: SCORE @28 . MINUS A_EXPN
+
+    MINUS  shift, and go to state 70
+
+
+state 40
+
+   91 CUSTOM_SHAPE: LINE1 @29 . BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 71
+
+
+state 41
+
+   36 A_EXPN: SCORE .
 
     $default  reduce using rule 36 (A_EXPN)
 
 
-State 43
+state 42
 
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   87 DELETE_STMENT: DELETE A_EXPN . A_EXPN
+   38 TERMINALS: ID .
 
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
-
-    A_EXPN     go to state 74
-    TERMINALS  go to state 44
+    $default  reduce using rule 38 (TERMINALS)
 
 
-State 44
+state 43
 
-   34 A_EXPN: TERMINALS .
+   39 TERMINALS: NUM .
 
-    $default  reduce using rule 34 (A_EXPN)
-
-
-State 45
-
-    6 STATEMENT: ID INIT . $@2 A_EXPN
-
-    $default  reduce using rule 5 ($@2)
-
-    $@2  go to state 75
+    $default  reduce using rule 39 (TERMINALS)
 
 
-State 46
+state 44
 
-    8 STATEMENT: ID ASSIGN . $@3 A_EXPN
+   37 A_EXPN: TIME .
 
-    $default  reduce using rule 7 ($@3)
-
-    $@3  go to state 76
+    $default  reduce using rule 37 (A_EXPN)
 
 
-State 47
+state 45
 
-   56 BOOL_RET: NOT . $@20 A_EXPN
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   88 DELETE_STMENT: DELETE A_EXPN . A_EXPN
 
-    $default  reduce using rule 55 ($@20)
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
 
-    $@20  go to state 77
-
-
-State 48
-
-   62 BOOL_RET: GRID . $@21 A_EXPN $@22 A_EXPN
-
-    $default  reduce using rule 60 ($@21)
-
-    $@21  go to state 78
-
-
-State 49
-
-   63 BOOL_RET: TRUE .
-
-    $default  reduce using rule 63 (BOOL_RET)
+    A_EXPN     go to state 76
+    TERMINALS  go to state 46
 
 
-State 50
+state 46
 
-   64 BOOL_RET: FALSE .
+   35 A_EXPN: TERMINALS .
+
+    $default  reduce using rule 35 (A_EXPN)
+
+
+state 47
+
+    7 STATEMENT: ID INIT . @2 A_EXPN
+
+    $default  reduce using rule 6 (@2)
+
+    @2  go to state 77
+
+
+state 48
+
+    9 STATEMENT: ID ASSIGN . @3 A_EXPN
+
+    $default  reduce using rule 8 (@3)
+
+    @3  go to state 78
+
+
+state 49
+
+   57 BOOL_RET: NOT . @20 BOOL_RET
+
+    $default  reduce using rule 56 (@20)
+
+    @20  go to state 79
+
+
+state 50
+
+   63 BOOL_RET: GRID . @21 A_EXPN @22 A_EXPN
+
+    $default  reduce using rule 61 (@21)
+
+    @21  go to state 80
+
+
+state 51
+
+   64 BOOL_RET: TRUE .
 
     $default  reduce using rule 64 (BOOL_RET)
 
 
-State 51
+state 52
 
-   59 BOOL_RET: PAUSE_BOOL .
+   65 BOOL_RET: FALSE .
+
+    $default  reduce using rule 65 (BOOL_RET)
+
+
+state 53
+
+   60 BOOL_RET: PAUSE_BOOL .
+
+    $default  reduce using rule 60 (BOOL_RET)
+
+
+state 54
+
+   59 BOOL_RET: LOST .
 
     $default  reduce using rule 59 (BOOL_RET)
 
 
-State 52
+state 55
 
-   58 BOOL_RET: LOST .
+   58 BOOL_RET: WIN .
 
     $default  reduce using rule 58 (BOOL_RET)
 
 
-State 53
+state 56
 
-   57 BOOL_RET: WIN .
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   45 BOOL_RET: A_EXPN . LE @14 A_EXPN
+   47         | A_EXPN . GE @15 A_EXPN
+   49         | A_EXPN . GT @16 A_EXPN
+   51         | A_EXPN . LT @17 A_EXPN
+   53         | A_EXPN . NOTEQUAL @18 A_EXPN
+   55         | A_EXPN . EQ @19 A_EXPN
 
-    $default  reduce using rule 57 (BOOL_RET)
+    PLUS      shift, and go to state 72
+    MINUS     shift, and go to state 73
+    MUL       shift, and go to state 74
+    DIV       shift, and go to state 75
+    EQ        shift, and go to state 81
+    NOTEQUAL  shift, and go to state 82
+    GE        shift, and go to state 83
+    GT        shift, and go to state 84
+    LE        shift, and go to state 85
+    LT        shift, and go to state 86
 
 
-State 54
+state 57
 
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   40 BOOL_RET: A_EXPN . AND $@12 A_EXPN
-   42         | A_EXPN . OR $@13 A_EXPN
-   44         | A_EXPN . LE $@14 A_EXPN
-   46         | A_EXPN . GE $@15 A_EXPN
-   48         | A_EXPN . GT $@16 A_EXPN
-   50         | A_EXPN . LT $@17 A_EXPN
-   52         | A_EXPN . NOTEQUAL $@18 A_EXPN
-   54         | A_EXPN . EQ $@19 A_EXPN
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   86 SHAPE_STMENT: SHAPE BOOL_RET .
 
-    PLUS      shift, and go to state 70
-    MINUS     shift, and go to state 71
-    MUL       shift, and go to state 72
-    DIV       shift, and go to state 73
-    EQ        shift, and go to state 79
-    NOTEQUAL  shift, and go to state 80
-    GE        shift, and go to state 81
-    GT        shift, and go to state 82
-    LE        shift, and go to state 83
-    LT        shift, and go to state 84
-    AND       shift, and go to state 85
-    OR        shift, and go to state 86
+    AND  shift, and go to state 87
+    OR   shift, and go to state 88
 
+    $default  reduce using rule 86 (SHAPE_STMENT)
 
-State 55
 
-   85 SHAPE_STMENT: SHAPE BOOL_RET .
+state 58
 
-    $default  reduce using rule 85 (SHAPE_STMENT)
+   87 TIME_STMENT: TIME PLUS . A_EXPN
 
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
 
-State 56
+    A_EXPN     go to state 89
+    TERMINALS  go to state 46
 
-   86 TIME_STMENT: TIME PLUS . A_EXPN
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+state 59
 
-    A_EXPN     go to state 87
-    TERMINALS  go to state 44
+   26 ELSE_BLOCK: ELSE . @7 STATEMENTS
 
+    $default  reduce using rule 25 (@7)
 
-State 57
+    @7  go to state 90
 
-   25 ELSE_BLOCK: ELSE . $@7 STATEMENTS
 
-    $default  reduce using rule 24 ($@7)
+state 60
 
-    $@7  go to state 88
-
-
-State 58
-
-    9 STATEMENT: IF_BLOCK ENDIF .
-
-    $default  reduce using rule 9 (STATEMENT)
-
-
-State 59
-
-   10 STATEMENT: IF_BLOCK ELSE_BLOCK . ENDIF
-
-    ENDIF  shift, and go to state 89
-
-
-State 60
-
-   23 IF_BLOCK: IF $@4 BOOL_RET . $@5 THEN $@6 STATEMENTS
-
-    $default  reduce using rule 21 ($@5)
-
-    $@5  go to state 90
-
-
-State 61
-
-   11 STATEMENT: DO STATEMENTS WHILE . BOOL_RET ENDWHILE
-
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
-
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
-    BOOL_RET   go to state 91
-
-
-State 62
-
-   12 STATEMENT: TICK STATEMENTS ENDTICK .
-
-    $default  reduce using rule 12 (STATEMENT)
-
-
-State 63
-
-   65 ST_STMENT: START INIT NUM . NUM
-
-    NUM  shift, and go to state 92
-
-
-State 64
-
-   69 CONFS: KEY . $@24 ACTION CONFS
-
-    $default  reduce using rule 68 ($@24)
-
-    $@24  go to state 93
-
-
-State 65
-
-   67 CONF_STMENT: CONF $@23 CONFS .
-
-    $default  reduce using rule 67 (CONF_STMENT)
-
-
-State 66
-
-   80 SCORE_STMENT: SCORE $@25 ASSIGN . $@26 NUM
-
-    $default  reduce using rule 79 ($@26)
-
-    $@26  go to state 94
-
-
-State 67
-
-   82 SCORE_STMENT: SCORE $@27 PLUS . A_EXPN
-
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
-
-    A_EXPN     go to state 95
-    TERMINALS  go to state 44
-
-
-State 68
-
-   84 SCORE_STMENT: SCORE $@28 MINUS . A_EXPN
-
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
-
-    A_EXPN     go to state 96
-    TERMINALS  go to state 44
-
-
-State 69
-
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET . $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
-
-    $default  reduce using rule 89 ($@30)
-
-    $@30  go to state 97
-
-
-State 70
-
-   27 A_EXPN: A_EXPN PLUS . $@8 A_EXPN
-
-    $default  reduce using rule 26 ($@8)
-
-    $@8  go to state 98
-
-
-State 71
-
-   29 A_EXPN: A_EXPN MINUS . $@9 A_EXPN
-
-    $default  reduce using rule 28 ($@9)
-
-    $@9  go to state 99
-
-
-State 72
-
-   31 A_EXPN: A_EXPN MUL . $@10 A_EXPN
-
-    $default  reduce using rule 30 ($@10)
-
-    $@10  go to state 100
-
-
-State 73
-
-   33 A_EXPN: A_EXPN DIV . $@11 A_EXPN
-
-    $default  reduce using rule 32 ($@11)
-
-    $@11  go to state 101
-
-
-State 74
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   87 DELETE_STMENT: DELETE A_EXPN A_EXPN .
-
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-
-    $default  reduce using rule 87 (DELETE_STMENT)
-
-
-State 75
-
-    6 STATEMENT: ID INIT $@2 . A_EXPN
-
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
-
-    A_EXPN     go to state 102
-    TERMINALS  go to state 44
-
-
-State 76
-
-    8 STATEMENT: ID ASSIGN $@3 . A_EXPN
-
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
-
-    A_EXPN     go to state 103
-    TERMINALS  go to state 44
-
-
-State 77
-
-   56 BOOL_RET: NOT $@20 . A_EXPN
-
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
-
-    A_EXPN     go to state 104
-    TERMINALS  go to state 44
-
-
-State 78
-
-   62 BOOL_RET: GRID $@21 . A_EXPN $@22 A_EXPN
-
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
-
-    A_EXPN     go to state 105
-    TERMINALS  go to state 44
-
-
-State 79
-
-   54 BOOL_RET: A_EXPN EQ . $@19 A_EXPN
-
-    $default  reduce using rule 53 ($@19)
-
-    $@19  go to state 106
-
-
-State 80
-
-   52 BOOL_RET: A_EXPN NOTEQUAL . $@18 A_EXPN
-
-    $default  reduce using rule 51 ($@18)
-
-    $@18  go to state 107
-
-
-State 81
-
-   46 BOOL_RET: A_EXPN GE . $@15 A_EXPN
-
-    $default  reduce using rule 45 ($@15)
-
-    $@15  go to state 108
-
-
-State 82
-
-   48 BOOL_RET: A_EXPN GT . $@16 A_EXPN
-
-    $default  reduce using rule 47 ($@16)
-
-    $@16  go to state 109
-
-
-State 83
-
-   44 BOOL_RET: A_EXPN LE . $@14 A_EXPN
-
-    $default  reduce using rule 43 ($@14)
-
-    $@14  go to state 110
-
-
-State 84
-
-   50 BOOL_RET: A_EXPN LT . $@17 A_EXPN
-
-    $default  reduce using rule 49 ($@17)
-
-    $@17  go to state 111
-
-
-State 85
-
-   40 BOOL_RET: A_EXPN AND . $@12 A_EXPN
-
-    $default  reduce using rule 39 ($@12)
-
-    $@12  go to state 112
-
-
-State 86
-
-   42 BOOL_RET: A_EXPN OR . $@13 A_EXPN
-
-    $default  reduce using rule 41 ($@13)
-
-    $@13  go to state 113
-
-
-State 87
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   86 TIME_STMENT: TIME PLUS A_EXPN .
-
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-
-    $default  reduce using rule 86 (TIME_STMENT)
-
-
-State 88
-
-   25 ELSE_BLOCK: ELSE $@7 . STATEMENTS
-
-    $default  reduce using rule 4 (STATEMENTS)
-
-    STATEMENTS  go to state 114
-
-
-State 89
-
-   10 STATEMENT: IF_BLOCK ELSE_BLOCK ENDIF .
+   10 STATEMENT: IF_BLOCK ENDIF .
 
     $default  reduce using rule 10 (STATEMENT)
 
 
-State 90
+state 61
 
-   23 IF_BLOCK: IF $@4 BOOL_RET $@5 . THEN $@6 STATEMENTS
+   11 STATEMENT: IF_BLOCK ELSE_BLOCK . ENDIF
 
-    THEN  shift, and go to state 115
+    ENDIF  shift, and go to state 91
 
 
-State 91
+state 62
 
-   11 STATEMENT: DO STATEMENTS WHILE BOOL_RET . ENDWHILE
+   24 IF_BLOCK: IF @4 BOOL_RET . @5 THEN @6 STATEMENTS
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
 
-    ENDWHILE  shift, and go to state 116
+    AND  shift, and go to state 87
+    OR   shift, and go to state 88
 
+    $default  reduce using rule 22 (@5)
 
-State 92
+    @5  go to state 92
 
-   65 ST_STMENT: START INIT NUM NUM .
 
-    $default  reduce using rule 65 (ST_STMENT)
+state 63
 
+   12 STATEMENT: DO STATEMENTS WHILE . BOOL_RET ENDWHILE
 
-State 93
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
 
-   69 CONFS: KEY $@24 . ACTION CONFS
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 93
 
-    PAUSE          shift, and go to state 117
-    CLOCKWISE      shift, and go to state 118
-    ANTICLOCKWISE  shift, and go to state 119
-    UP             shift, and go to state 120
-    RIGHT          shift, and go to state 121
-    DOWN           shift, and go to state 122
-    LEFT           shift, and go to state 123
 
-    ACTION  go to state 124
+state 64
 
+   13 STATEMENT: TICK STATEMENTS ENDTICK .
 
-State 94
+    $default  reduce using rule 13 (STATEMENT)
 
-   80 SCORE_STMENT: SCORE $@25 ASSIGN $@26 . NUM
 
-    NUM  shift, and go to state 125
+state 65
 
+   66 ST_STMENT: START INIT NUM . NUM
 
-State 95
+    NUM  shift, and go to state 94
 
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   82 SCORE_STMENT: SCORE $@27 PLUS A_EXPN .
 
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
+state 66
 
-    $default  reduce using rule 82 (SCORE_STMENT)
+   70 CONFS: KEY . @24 ACTION CONFS
 
+    $default  reduce using rule 69 (@24)
 
-State 96
+    @24  go to state 95
 
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   84 SCORE_STMENT: SCORE $@28 MINUS A_EXPN .
 
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
+state 67
 
-    $default  reduce using rule 84 (SCORE_STMENT)
+   68 CONF_STMENT: CONF @23 CONFS .
 
+    $default  reduce using rule 68 (CONF_STMENT)
 
-State 97
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 . BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+state 68
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
+   81 SCORE_STMENT: SCORE @25 ASSIGN . @26 TERMINALS
 
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
-    BOOL_RET   go to state 126
+    $default  reduce using rule 80 (@26)
 
+    @26  go to state 96
 
-State 98
 
-   27 A_EXPN: A_EXPN PLUS $@8 . A_EXPN
+state 69
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+   83 SCORE_STMENT: SCORE @27 PLUS . A_EXPN
 
-    A_EXPN     go to state 127
-    TERMINALS  go to state 44
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
 
+    A_EXPN     go to state 97
+    TERMINALS  go to state 46
 
-State 99
 
-   29 A_EXPN: A_EXPN MINUS $@9 . A_EXPN
+state 70
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+   85 SCORE_STMENT: SCORE @28 MINUS . A_EXPN
 
-    A_EXPN     go to state 128
-    TERMINALS  go to state 44
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
 
+    A_EXPN     go to state 98
+    TERMINALS  go to state 46
 
-State 100
 
-   31 A_EXPN: A_EXPN MUL $@10 . A_EXPN
+state 71
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET . @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
-    A_EXPN     go to state 129
-    TERMINALS  go to state 44
+    AND  shift, and go to state 87
+    OR   shift, and go to state 88
 
+    $default  reduce using rule 90 (@30)
 
-State 101
+    @30  go to state 99
 
-   33 A_EXPN: A_EXPN DIV $@11 . A_EXPN
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+state 72
 
-    A_EXPN     go to state 130
-    TERMINALS  go to state 44
+   28 A_EXPN: A_EXPN PLUS . @8 A_EXPN
 
+    $default  reduce using rule 27 (@8)
 
-State 102
+    @8  go to state 100
 
-    6 STATEMENT: ID INIT $@2 A_EXPN .
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
 
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
+state 73
 
-    $default  reduce using rule 6 (STATEMENT)
+   30 A_EXPN: A_EXPN MINUS . @9 A_EXPN
 
+    $default  reduce using rule 29 (@9)
 
-State 103
+    @9  go to state 101
 
-    8 STATEMENT: ID ASSIGN $@3 A_EXPN .
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
 
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
+state 74
 
-    $default  reduce using rule 8 (STATEMENT)
+   32 A_EXPN: A_EXPN MUL . @10 A_EXPN
 
+    $default  reduce using rule 31 (@10)
 
-State 104
+    @10  go to state 102
 
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   56 BOOL_RET: NOT $@20 A_EXPN .
 
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
+state 75
 
-    $default  reduce using rule 56 (BOOL_RET)
+   34 A_EXPN: A_EXPN DIV . @11 A_EXPN
 
+    $default  reduce using rule 33 (@11)
 
-State 105
+    @11  go to state 103
 
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   62 BOOL_RET: GRID $@21 A_EXPN . $@22 A_EXPN
 
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
+state 76
 
-    $default  reduce using rule 61 ($@22)
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   88 DELETE_STMENT: DELETE A_EXPN A_EXPN .
 
-    $@22  go to state 131
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
 
+    $default  reduce using rule 88 (DELETE_STMENT)
 
-State 106
 
-   54 BOOL_RET: A_EXPN EQ $@19 . A_EXPN
+state 77
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+    7 STATEMENT: ID INIT @2 . A_EXPN
 
-    A_EXPN     go to state 132
-    TERMINALS  go to state 44
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
 
+    A_EXPN     go to state 104
+    TERMINALS  go to state 46
 
-State 107
 
-   52 BOOL_RET: A_EXPN NOTEQUAL $@18 . A_EXPN
+state 78
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+    9 STATEMENT: ID ASSIGN @3 . A_EXPN
 
-    A_EXPN     go to state 133
-    TERMINALS  go to state 44
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
 
+    A_EXPN     go to state 105
+    TERMINALS  go to state 46
 
-State 108
 
-   46 BOOL_RET: A_EXPN GE $@15 . A_EXPN
+state 79
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+   57 BOOL_RET: NOT @20 . BOOL_RET
 
-    A_EXPN     go to state 134
-    TERMINALS  go to state 44
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
 
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 106
 
-State 109
 
-   48 BOOL_RET: A_EXPN GT $@16 . A_EXPN
+state 80
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+   63 BOOL_RET: GRID @21 . A_EXPN @22 A_EXPN
 
-    A_EXPN     go to state 135
-    TERMINALS  go to state 44
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
 
+    A_EXPN     go to state 107
+    TERMINALS  go to state 46
 
-State 110
 
-   44 BOOL_RET: A_EXPN LE $@14 . A_EXPN
+state 81
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+   55 BOOL_RET: A_EXPN EQ . @19 A_EXPN
 
-    A_EXPN     go to state 136
-    TERMINALS  go to state 44
+    $default  reduce using rule 54 (@19)
 
+    @19  go to state 108
 
-State 111
 
-   50 BOOL_RET: A_EXPN LT $@17 . A_EXPN
+state 82
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+   53 BOOL_RET: A_EXPN NOTEQUAL . @18 A_EXPN
 
-    A_EXPN     go to state 137
-    TERMINALS  go to state 44
+    $default  reduce using rule 52 (@18)
 
+    @18  go to state 109
 
-State 112
 
-   40 BOOL_RET: A_EXPN AND $@12 . A_EXPN
+state 83
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+   47 BOOL_RET: A_EXPN GE . @15 A_EXPN
 
-    A_EXPN     go to state 138
-    TERMINALS  go to state 44
+    $default  reduce using rule 46 (@15)
 
+    @15  go to state 110
 
-State 113
 
-   42 BOOL_RET: A_EXPN OR $@13 . A_EXPN
+state 84
 
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
+   49 BOOL_RET: A_EXPN GT . @16 A_EXPN
 
-    A_EXPN     go to state 139
-    TERMINALS  go to state 44
+    $default  reduce using rule 48 (@16)
 
+    @16  go to state 111
 
-State 114
 
-    3 STATEMENTS: STATEMENTS . STATEMENT
-   25 ELSE_BLOCK: ELSE $@7 STATEMENTS .
+state 85
 
-    IF      shift, and go to state 9
-    DO      shift, and go to state 10
-    TICK    shift, and go to state 11
-    START   shift, and go to state 13
-    CONF    shift, and go to state 14
-    SCORE   shift, and go to state 15
-    LINE1   shift, and go to state 16
-    DELETE  shift, and go to state 17
-    ID      shift, and go to state 18
-    SHAPE   shift, and go to state 19
-    TIME    shift, and go to state 20
+   45 BOOL_RET: A_EXPN LE . @14 A_EXPN
 
-    $default  reduce using rule 25 (ELSE_BLOCK)
+    $default  reduce using rule 44 (@14)
 
-    STATEMENT      go to state 21
-    IF_BLOCK       go to state 22
-    ST_STMENT      go to state 23
-    CONF_STMENT    go to state 24
-    SCORE_STMENT   go to state 25
-    SHAPE_STMENT   go to state 26
-    TIME_STMENT    go to state 27
-    DELETE_STMENT  go to state 28
-    CUSTOM_SHAPE   go to state 29
+    @14  go to state 112
 
 
-State 115
+state 86
 
-   23 IF_BLOCK: IF $@4 BOOL_RET $@5 THEN . $@6 STATEMENTS
+   51 BOOL_RET: A_EXPN LT . @17 A_EXPN
 
-    $default  reduce using rule 22 ($@6)
+    $default  reduce using rule 50 (@17)
 
-    $@6  go to state 140
+    @17  go to state 113
 
 
-State 116
+state 87
 
-   11 STATEMENT: DO STATEMENTS WHILE BOOL_RET ENDWHILE .
+   41 BOOL_RET: BOOL_RET AND . @12 BOOL_RET
+
+    $default  reduce using rule 40 (@12)
+
+    @12  go to state 114
+
+
+state 88
+
+   43 BOOL_RET: BOOL_RET OR . @13 BOOL_RET
+
+    $default  reduce using rule 42 (@13)
+
+    @13  go to state 115
+
+
+state 89
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   87 TIME_STMENT: TIME PLUS A_EXPN .
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 87 (TIME_STMENT)
+
+
+state 90
+
+   26 ELSE_BLOCK: ELSE @7 . STATEMENTS
+
+    $default  reduce using rule 5 (STATEMENTS)
+
+    STATEMENTS  go to state 116
+
+
+state 91
+
+   11 STATEMENT: IF_BLOCK ELSE_BLOCK ENDIF .
 
     $default  reduce using rule 11 (STATEMENT)
 
 
-State 117
+state 92
 
-   77 ACTION: PAUSE .
+   24 IF_BLOCK: IF @4 BOOL_RET @5 . THEN @6 STATEMENTS
 
-    $default  reduce using rule 77 (ACTION)
-
-
-State 118
-
-   75 ACTION: CLOCKWISE .
-
-    $default  reduce using rule 75 (ACTION)
+    THEN  shift, and go to state 117
 
 
-State 119
+state 93
 
-   76 ACTION: ANTICLOCKWISE .
+   12 STATEMENT: DO STATEMENTS WHILE BOOL_RET . ENDWHILE
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+
+    AND       shift, and go to state 87
+    OR        shift, and go to state 88
+    ENDWHILE  shift, and go to state 118
+
+
+state 94
+
+   66 ST_STMENT: START INIT NUM NUM .
+
+    $default  reduce using rule 66 (ST_STMENT)
+
+
+state 95
+
+   70 CONFS: KEY @24 . ACTION CONFS
+
+    PAUSE          shift, and go to state 119
+    CLOCKWISE      shift, and go to state 120
+    ANTICLOCKWISE  shift, and go to state 121
+    UP             shift, and go to state 122
+    RIGHT          shift, and go to state 123
+    DOWN           shift, and go to state 124
+    LEFT           shift, and go to state 125
+
+    ACTION  go to state 126
+
+
+state 96
+
+   81 SCORE_STMENT: SCORE @25 ASSIGN @26 . TERMINALS
+
+    ID   shift, and go to state 42
+    NUM  shift, and go to state 43
+
+    TERMINALS  go to state 127
+
+
+state 97
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   83 SCORE_STMENT: SCORE @27 PLUS A_EXPN .
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 83 (SCORE_STMENT)
+
+
+state 98
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   85 SCORE_STMENT: SCORE @28 MINUS A_EXPN .
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 85 (SCORE_STMENT)
+
+
+state 99
+
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 . BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 128
+
+
+state 100
+
+   28 A_EXPN: A_EXPN PLUS @8 . A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 129
+    TERMINALS  go to state 46
+
+
+state 101
+
+   30 A_EXPN: A_EXPN MINUS @9 . A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 130
+    TERMINALS  go to state 46
+
+
+state 102
+
+   32 A_EXPN: A_EXPN MUL @10 . A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 131
+    TERMINALS  go to state 46
+
+
+state 103
+
+   34 A_EXPN: A_EXPN DIV @11 . A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 132
+    TERMINALS  go to state 46
+
+
+state 104
+
+    7 STATEMENT: ID INIT @2 A_EXPN .
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 7 (STATEMENT)
+
+
+state 105
+
+    9 STATEMENT: ID ASSIGN @3 A_EXPN .
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 9 (STATEMENT)
+
+
+state 106
+
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   57         | NOT @20 BOOL_RET .
+
+    $default  reduce using rule 57 (BOOL_RET)
+
+
+state 107
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   63 BOOL_RET: GRID @21 A_EXPN . @22 A_EXPN
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 62 (@22)
+
+    @22  go to state 133
+
+
+state 108
+
+   55 BOOL_RET: A_EXPN EQ @19 . A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 134
+    TERMINALS  go to state 46
+
+
+state 109
+
+   53 BOOL_RET: A_EXPN NOTEQUAL @18 . A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 135
+    TERMINALS  go to state 46
+
+
+state 110
+
+   47 BOOL_RET: A_EXPN GE @15 . A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 136
+    TERMINALS  go to state 46
+
+
+state 111
+
+   49 BOOL_RET: A_EXPN GT @16 . A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 137
+    TERMINALS  go to state 46
+
+
+state 112
+
+   45 BOOL_RET: A_EXPN LE @14 . A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 138
+    TERMINALS  go to state 46
+
+
+state 113
+
+   51 BOOL_RET: A_EXPN LT @17 . A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 139
+    TERMINALS  go to state 46
+
+
+state 114
+
+   41 BOOL_RET: BOOL_RET AND @12 . BOOL_RET
+
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 140
+
+
+state 115
+
+   43 BOOL_RET: BOOL_RET OR @13 . BOOL_RET
+
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 141
+
+
+state 116
+
+    4 STATEMENTS: STATEMENTS . STATEMENT
+   26 ELSE_BLOCK: ELSE @7 STATEMENTS .
+
+    IF      shift, and go to state 11
+    DO      shift, and go to state 12
+    TICK    shift, and go to state 13
+    START   shift, and go to state 14
+    CONF    shift, and go to state 15
+    SCORE   shift, and go to state 16
+    LINE1   shift, and go to state 17
+    DELETE  shift, and go to state 18
+    ID      shift, and go to state 19
+    SHAPE   shift, and go to state 20
+    TIME    shift, and go to state 21
+
+    $default  reduce using rule 26 (ELSE_BLOCK)
+
+    STATEMENT      go to state 22
+    IF_BLOCK       go to state 23
+    ST_STMENT      go to state 24
+    CONF_STMENT    go to state 25
+    SCORE_STMENT   go to state 26
+    SHAPE_STMENT   go to state 27
+    TIME_STMENT    go to state 28
+    DELETE_STMENT  go to state 29
+    CUSTOM_SHAPE   go to state 30
+
+
+state 117
+
+   24 IF_BLOCK: IF @4 BOOL_RET @5 THEN . @6 STATEMENTS
+
+    $default  reduce using rule 23 (@6)
+
+    @6  go to state 142
+
+
+state 118
+
+   12 STATEMENT: DO STATEMENTS WHILE BOOL_RET ENDWHILE .
+
+    $default  reduce using rule 12 (STATEMENT)
+
+
+state 119
+
+   78 ACTION: PAUSE .
+
+    $default  reduce using rule 78 (ACTION)
+
+
+state 120
+
+   76 ACTION: CLOCKWISE .
 
     $default  reduce using rule 76 (ACTION)
 
 
-State 120
+state 121
 
-   71 ACTION: UP .
+   77 ACTION: ANTICLOCKWISE .
 
-    $default  reduce using rule 71 (ACTION)
-
-
-State 121
-
-   74 ACTION: RIGHT .
-
-    $default  reduce using rule 74 (ACTION)
+    $default  reduce using rule 77 (ACTION)
 
 
-State 122
+state 122
 
-   72 ACTION: DOWN .
+   72 ACTION: UP .
 
     $default  reduce using rule 72 (ACTION)
 
 
-State 123
+state 123
 
-   73 ACTION: LEFT .
+   75 ACTION: RIGHT .
+
+    $default  reduce using rule 75 (ACTION)
+
+
+state 124
+
+   73 ACTION: DOWN .
 
     $default  reduce using rule 73 (ACTION)
 
 
-State 124
+state 125
 
-   69 CONFS: KEY $@24 ACTION . CONFS
+   74 ACTION: LEFT .
 
-    KEY  shift, and go to state 64
+    $default  reduce using rule 74 (ACTION)
+
+
+state 126
+
+   70 CONFS: KEY @24 ACTION . CONFS
+
+    KEY  shift, and go to state 66
+
+    $default  reduce using rule 71 (CONFS)
+
+    CONFS  go to state 143
+
+
+state 127
+
+   81 SCORE_STMENT: SCORE @25 ASSIGN @26 TERMINALS .
+
+    $default  reduce using rule 81 (SCORE_STMENT)
+
+
+state 128
+
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET . BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+
+    AND         shift, and go to state 87
+    OR          shift, and go to state 88
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 144
+
+
+state 129
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   28       | A_EXPN PLUS @8 A_EXPN .
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+
+    MUL  shift, and go to state 74
+    DIV  shift, and go to state 75
+
+    $default  reduce using rule 28 (A_EXPN)
+
+
+state 130
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   30       | A_EXPN MINUS @9 A_EXPN .
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+
+    MUL  shift, and go to state 74
+    DIV  shift, and go to state 75
+
+    $default  reduce using rule 30 (A_EXPN)
+
+
+state 131
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   32       | A_EXPN MUL @10 A_EXPN .
+   34       | A_EXPN . DIV @11 A_EXPN
+
+    $default  reduce using rule 32 (A_EXPN)
+
+
+state 132
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   34       | A_EXPN DIV @11 A_EXPN .
+
+    $default  reduce using rule 34 (A_EXPN)
+
+
+state 133
+
+   63 BOOL_RET: GRID @21 A_EXPN @22 . A_EXPN
+
+    SCORE  shift, and go to state 41
+    ID     shift, and go to state 42
+    NUM    shift, and go to state 43
+    TIME   shift, and go to state 44
+
+    A_EXPN     go to state 145
+    TERMINALS  go to state 46
+
+
+state 134
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   55 BOOL_RET: A_EXPN EQ @19 A_EXPN .
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 55 (BOOL_RET)
+
+
+state 135
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   53 BOOL_RET: A_EXPN NOTEQUAL @18 A_EXPN .
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 53 (BOOL_RET)
+
+
+state 136
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   47 BOOL_RET: A_EXPN GE @15 A_EXPN .
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 47 (BOOL_RET)
+
+
+state 137
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   49 BOOL_RET: A_EXPN GT @16 A_EXPN .
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 49 (BOOL_RET)
+
+
+state 138
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   45 BOOL_RET: A_EXPN LE @14 A_EXPN .
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 45 (BOOL_RET)
+
+
+state 139
+
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   51 BOOL_RET: A_EXPN LT @17 A_EXPN .
+
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
+
+    $default  reduce using rule 51 (BOOL_RET)
+
+
+state 140
+
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   41         | BOOL_RET AND @12 BOOL_RET .
+   43         | BOOL_RET . OR @13 BOOL_RET
+
+    $default  reduce using rule 41 (BOOL_RET)
+
+
+state 141
+
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   43         | BOOL_RET OR @13 BOOL_RET .
+
+    AND  shift, and go to state 87
+
+    $default  reduce using rule 43 (BOOL_RET)
+
+
+state 142
+
+   24 IF_BLOCK: IF @4 BOOL_RET @5 THEN @6 . STATEMENTS
+
+    $default  reduce using rule 5 (STATEMENTS)
+
+    STATEMENTS  go to state 146
+
+
+state 143
+
+   70 CONFS: KEY @24 ACTION CONFS .
 
     $default  reduce using rule 70 (CONFS)
 
-    CONFS  go to state 141
 
-
-State 125
-
-   80 SCORE_STMENT: SCORE $@25 ASSIGN $@26 NUM .
-
-    $default  reduce using rule 80 (SCORE_STMENT)
-
-
-State 126
-
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET . BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
-
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
-
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
-    BOOL_RET   go to state 142
-
-
-State 127
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   27       | A_EXPN PLUS $@8 A_EXPN .
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-
-    MUL  shift, and go to state 72
-    DIV  shift, and go to state 73
-
-    $default  reduce using rule 27 (A_EXPN)
-
-
-State 128
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   29       | A_EXPN MINUS $@9 A_EXPN .
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-
-    MUL  shift, and go to state 72
-    DIV  shift, and go to state 73
-
-    $default  reduce using rule 29 (A_EXPN)
-
-
-State 129
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   31       | A_EXPN MUL $@10 A_EXPN .
-   33       | A_EXPN . DIV $@11 A_EXPN
-
-    $default  reduce using rule 31 (A_EXPN)
-
-
-State 130
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   33       | A_EXPN DIV $@11 A_EXPN .
-
-    $default  reduce using rule 33 (A_EXPN)
-
-
-State 131
-
-   62 BOOL_RET: GRID $@21 A_EXPN $@22 . A_EXPN
-
-    SCORE  shift, and go to state 39
-    ID     shift, and go to state 40
-    NUM    shift, and go to state 41
-    TIME   shift, and go to state 42
-
-    A_EXPN     go to state 143
-    TERMINALS  go to state 44
-
-
-State 132
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   54 BOOL_RET: A_EXPN EQ $@19 A_EXPN .
-
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-
-    $default  reduce using rule 54 (BOOL_RET)
-
-
-State 133
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   52 BOOL_RET: A_EXPN NOTEQUAL $@18 A_EXPN .
-
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-
-    $default  reduce using rule 52 (BOOL_RET)
-
-
-State 134
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   46 BOOL_RET: A_EXPN GE $@15 A_EXPN .
-
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-
-    $default  reduce using rule 46 (BOOL_RET)
-
-
-State 135
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   48 BOOL_RET: A_EXPN GT $@16 A_EXPN .
-
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-
-    $default  reduce using rule 48 (BOOL_RET)
-
-
-State 136
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   44 BOOL_RET: A_EXPN LE $@14 A_EXPN .
-
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-
-    $default  reduce using rule 44 (BOOL_RET)
-
-
-State 137
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   50 BOOL_RET: A_EXPN LT $@17 A_EXPN .
-
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-
-    $default  reduce using rule 50 (BOOL_RET)
-
-
-State 138
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   40 BOOL_RET: A_EXPN AND $@12 A_EXPN .
-
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-
-    $default  reduce using rule 40 (BOOL_RET)
-
-
-State 139
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   42 BOOL_RET: A_EXPN OR $@13 A_EXPN .
-
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-
-    $default  reduce using rule 42 (BOOL_RET)
-
-
-State 140
-
-   23 IF_BLOCK: IF $@4 BOOL_RET $@5 THEN $@6 . STATEMENTS
-
-    $default  reduce using rule 4 (STATEMENTS)
-
-    STATEMENTS  go to state 144
-
-
-State 141
-
-   69 CONFS: KEY $@24 ACTION CONFS .
-
-    $default  reduce using rule 69 (CONFS)
-
-
-State 142
-
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET . BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
-
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
-
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
-    BOOL_RET   go to state 145
-
-
-State 143
-
-   27 A_EXPN: A_EXPN . PLUS $@8 A_EXPN
-   29       | A_EXPN . MINUS $@9 A_EXPN
-   31       | A_EXPN . MUL $@10 A_EXPN
-   33       | A_EXPN . DIV $@11 A_EXPN
-   62 BOOL_RET: GRID $@21 A_EXPN $@22 A_EXPN .
-
-    PLUS   shift, and go to state 70
-    MINUS  shift, and go to state 71
-    MUL    shift, and go to state 72
-    DIV    shift, and go to state 73
-
-    $default  reduce using rule 62 (BOOL_RET)
-
-
-State 144
-
-    3 STATEMENTS: STATEMENTS . STATEMENT
-   23 IF_BLOCK: IF $@4 BOOL_RET $@5 THEN $@6 STATEMENTS .
-
-    IF      shift, and go to state 9
-    DO      shift, and go to state 10
-    TICK    shift, and go to state 11
-    START   shift, and go to state 13
-    CONF    shift, and go to state 14
-    SCORE   shift, and go to state 15
-    LINE1   shift, and go to state 16
-    DELETE  shift, and go to state 17
-    ID      shift, and go to state 18
-    SHAPE   shift, and go to state 19
-    TIME    shift, and go to state 20
-
-    $default  reduce using rule 23 (IF_BLOCK)
-
-    STATEMENT      go to state 21
-    IF_BLOCK       go to state 22
-    ST_STMENT      go to state 23
-    CONF_STMENT    go to state 24
-    SCORE_STMENT   go to state 25
-    SHAPE_STMENT   go to state 26
-    TIME_STMENT    go to state 27
-    DELETE_STMENT  go to state 28
-    CUSTOM_SHAPE   go to state 29
-
-
-State 145
-
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET . LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
-
-    LINE2  shift, and go to state 146
-
-
-State 146
-
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 . BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
-
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
-
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
+state 144
+
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET . BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+
+    AND         shift, and go to state 87
+    OR          shift, and go to state 88
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
     BOOL_RET   go to state 147
 
 
-State 147
+state 145
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET . BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+   28 A_EXPN: A_EXPN . PLUS @8 A_EXPN
+   30       | A_EXPN . MINUS @9 A_EXPN
+   32       | A_EXPN . MUL @10 A_EXPN
+   34       | A_EXPN . DIV @11 A_EXPN
+   63 BOOL_RET: GRID @21 A_EXPN @22 A_EXPN .
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
+    PLUS   shift, and go to state 72
+    MINUS  shift, and go to state 73
+    MUL    shift, and go to state 74
+    DIV    shift, and go to state 75
 
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
-    BOOL_RET   go to state 148
+    $default  reduce using rule 63 (BOOL_RET)
 
 
-State 148
+state 146
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET . BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+    4 STATEMENTS: STATEMENTS . STATEMENT
+   24 IF_BLOCK: IF @4 BOOL_RET @5 THEN @6 STATEMENTS .
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
+    IF      shift, and go to state 11
+    DO      shift, and go to state 12
+    TICK    shift, and go to state 13
+    START   shift, and go to state 14
+    CONF    shift, and go to state 15
+    SCORE   shift, and go to state 16
+    LINE1   shift, and go to state 17
+    DELETE  shift, and go to state 18
+    ID      shift, and go to state 19
+    SHAPE   shift, and go to state 20
+    TIME    shift, and go to state 21
 
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
+    $default  reduce using rule 24 (IF_BLOCK)
+
+    STATEMENT      go to state 22
+    IF_BLOCK       go to state 23
+    ST_STMENT      go to state 24
+    CONF_STMENT    go to state 25
+    SCORE_STMENT   go to state 26
+    SHAPE_STMENT   go to state 27
+    TIME_STMENT    go to state 28
+    DELETE_STMENT  go to state 29
+    CUSTOM_SHAPE   go to state 30
+
+
+state 147
+
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET . LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+
+    AND    shift, and go to state 87
+    OR     shift, and go to state 88
+    LINE2  shift, and go to state 148
+
+
+state 148
+
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 . BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
     BOOL_RET   go to state 149
 
 
-State 149
+state 149
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET . BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET . BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
+    AND         shift, and go to state 87
+    OR          shift, and go to state 88
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
 
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
     BOOL_RET   go to state 150
 
 
-State 150
+state 150
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET . LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET . BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
-    LINE3  shift, and go to state 151
+    AND         shift, and go to state 87
+    OR          shift, and go to state 88
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 151
 
 
-State 151
+state 151
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 . BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET . BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
+    AND         shift, and go to state 87
+    OR          shift, and go to state 88
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
 
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
     BOOL_RET   go to state 152
 
 
-State 152
+state 152
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET . BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET . LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
-
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
-    BOOL_RET   go to state 153
+    AND    shift, and go to state 87
+    OR     shift, and go to state 88
+    LINE3  shift, and go to state 153
 
 
-State 153
+state 153
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET . BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 . BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
 
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
     BOOL_RET   go to state 154
 
 
-State 154
+state 154
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET . BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET . BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
+    AND         shift, and go to state 87
+    OR          shift, and go to state 88
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
 
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
     BOOL_RET   go to state 155
 
 
-State 155
+state 155
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET . LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET . BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
-    LINE4  shift, and go to state 156
+    AND         shift, and go to state 87
+    OR          shift, and go to state 88
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 156
 
 
-State 156
+state 156
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 . BOOL_RET BOOL_RET BOOL_RET BOOL_RET
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET . BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
+    AND         shift, and go to state 87
+    OR          shift, and go to state 88
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
 
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
     BOOL_RET   go to state 157
 
 
-State 157
+state 157
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET . BOOL_RET BOOL_RET BOOL_RET
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET . LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
-
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
-    BOOL_RET   go to state 158
+    AND    shift, and go to state 87
+    OR     shift, and go to state 88
+    LINE4  shift, and go to state 158
 
 
-State 158
+state 158
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET . BOOL_RET BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 . BOOL_RET BOOL_RET BOOL_RET BOOL_RET
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
 
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
     BOOL_RET   go to state 159
 
 
-State 159
+state 159
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET . BOOL_RET
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET . BOOL_RET BOOL_RET BOOL_RET
 
-    NOT         shift, and go to state 47
-    GRID        shift, and go to state 48
-    SCORE       shift, and go to state 39
-    TRUE        shift, and go to state 49
-    FALSE       shift, and go to state 50
-    ID          shift, and go to state 40
-    NUM         shift, and go to state 41
-    PAUSE_BOOL  shift, and go to state 51
-    LOST        shift, and go to state 52
-    WIN         shift, and go to state 53
-    TIME        shift, and go to state 42
+    AND         shift, and go to state 87
+    OR          shift, and go to state 88
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
 
-    A_EXPN     go to state 54
-    TERMINALS  go to state 44
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
     BOOL_RET   go to state 160
 
 
-State 160
+state 160
 
-   90 CUSTOM_SHAPE: LINE1 $@29 BOOL_RET $@30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET .
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET . BOOL_RET BOOL_RET
 
-    $default  reduce using rule 90 (CUSTOM_SHAPE)
+    AND         shift, and go to state 87
+    OR          shift, and go to state 88
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 161
+
+
+state 161
+
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET . BOOL_RET
+
+    AND         shift, and go to state 87
+    OR          shift, and go to state 88
+    NOT         shift, and go to state 49
+    GRID        shift, and go to state 50
+    SCORE       shift, and go to state 41
+    TRUE        shift, and go to state 51
+    FALSE       shift, and go to state 52
+    ID          shift, and go to state 42
+    NUM         shift, and go to state 43
+    PAUSE_BOOL  shift, and go to state 53
+    LOST        shift, and go to state 54
+    WIN         shift, and go to state 55
+    TIME        shift, and go to state 44
+
+    A_EXPN     go to state 56
+    TERMINALS  go to state 46
+    BOOL_RET   go to state 162
+
+
+state 162
+
+   41 BOOL_RET: BOOL_RET . AND @12 BOOL_RET
+   43         | BOOL_RET . OR @13 BOOL_RET
+   91 CUSTOM_SHAPE: LINE1 @29 BOOL_RET @30 BOOL_RET BOOL_RET BOOL_RET LINE2 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE3 BOOL_RET BOOL_RET BOOL_RET BOOL_RET LINE4 BOOL_RET BOOL_RET BOOL_RET BOOL_RET .
+
+    AND  shift, and go to state 87
+    OR   shift, and go to state 88
+
+    $default  reduce using rule 91 (CUSTOM_SHAPE)

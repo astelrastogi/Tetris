@@ -1,0 +1,4 @@
+grid init 19 8
+Var_test init 32 
+test_var = Var_test
+%

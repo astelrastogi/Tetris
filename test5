@@ -1,0 +1,5 @@
+grid init 10 10
+conf KEY_T left
+     KEY_TAB pause
+     KEY_RIGHT clockwise
+%
