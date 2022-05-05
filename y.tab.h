@@ -1,14 +1,14 @@
-/* A Bison parser, made by GNU Bison 3.5.1.  */
+/* A Bison parser, made by GNU Bison 2.3.  */
 
-/* Bison interface for Yacc-like parsers in C
+/* Skeleton interface for Bison's Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
-   Inc.
+   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
+   Free Software Foundation, Inc.
 
-   This program is free software: you can redistribute it and/or modify
+   This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,9 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor,
+   Boston, MA 02110-1301, USA.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -31,76 +33,64 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* Undocumented macros, especially those whose name start with YY_,
-   are private implementation details.  Do not rely on them.  */
-
-#ifndef YY_YY_Y_TAB_H_INCLUDED
-# define YY_YY_Y_TAB_H_INCLUDED
-/* Debug traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 1
-#endif
-#if YYDEBUG
-extern int yydebug;
-#endif
-
-/* Token type.  */
+/* Tokens.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-  enum yytokentype
-  {
-    PLUS = 258,
-    MINUS = 259,
-    MUL = 260,
-    DIV = 261,
-    EQ = 262,
-    NOTEQUAL = 263,
-    GE = 264,
-    GT = 265,
-    LE = 266,
-    LT = 267,
-    AND = 268,
-    OR = 269,
-    NOT = 270,
-    INIT = 271,
-    ASSIGN = 272,
-    IF = 273,
-    THEN = 274,
-    ELSE = 275,
-    ENDIF = 276,
-    DO = 277,
-    WHILE = 278,
-    ENDWHILE = 279,
-    TICK = 280,
-    ENDTICK = 281,
-    EOP = 282,
-    GRID = 283,
-    START = 284,
-    CONF = 285,
-    SCORE = 286,
-    LINE1 = 287,
-    LINE2 = 288,
-    LINE3 = 289,
-    LINE4 = 290,
-    DELETE = 291,
-    PAUSE = 292,
-    CLOCKWISE = 293,
-    ANTICLOCKWISE = 294,
-    UP = 295,
-    RIGHT = 296,
-    DOWN = 297,
-    LEFT = 298,
-    TRUE = 299,
-    FALSE = 300,
-    ID = 301,
-    NUM = 302,
-    KEY = 303,
-    SHAPE = 304,
-    PAUSE_BOOL = 305,
-    LOST = 306,
-    WIN = 307,
-    TIME = 308
-  };
+   /* Put the tokens into the symbol table, so that GDB and other debuggers
+      know about them.  */
+   enum yytokentype {
+     PLUS = 258,
+     MINUS = 259,
+     MUL = 260,
+     DIV = 261,
+     EQ = 262,
+     NOTEQUAL = 263,
+     GE = 264,
+     GT = 265,
+     LE = 266,
+     LT = 267,
+     AND = 268,
+     OR = 269,
+     NOT = 270,
+     INIT = 271,
+     ASSIGN = 272,
+     IF = 273,
+     THEN = 274,
+     ELSE = 275,
+     ENDIF = 276,
+     DO = 277,
+     WHILE = 278,
+     ENDWHILE = 279,
+     TICK = 280,
+     ENDTICK = 281,
+     EOP = 282,
+     GRID = 283,
+     START = 284,
+     CONF = 285,
+     SCORE = 286,
+     LINE1 = 287,
+     LINE2 = 288,
+     LINE3 = 289,
+     LINE4 = 290,
+     DELETE = 291,
+     PAUSE = 292,
+     CLOCKWISE = 293,
+     ANTICLOCKWISE = 294,
+     UP = 295,
+     RIGHT = 296,
+     DOWN = 297,
+     LEFT = 298,
+     TRUE = 299,
+     FALSE = 300,
+     ID = 301,
+     NUM = 302,
+     KEY = 303,
+     SHAPE = 304,
+     PAUSE_BOOL = 305,
+     LOST = 306,
+     WIN = 307,
+     TIME = 308
+   };
 #endif
 /* Tokens.  */
 #define PLUS 258
@@ -155,26 +145,23 @@ extern int yydebug;
 #define WIN 307
 #define TIME 308
 
-/* Value type.  */
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
-{
-#line 21 "tetris.y"
 
+
+
+#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+typedef union YYSTYPE
+#line 21 "tetris.y"
+{
 	int data_type;
 	char var_name[30];
-
-#line 168 "y.tab.h"
-
-};
-typedef union YYSTYPE YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
+}
+/* Line 1529 of yacc.c.  */
+#line 160 "y.tab.h"
+	YYSTYPE;
+# define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
+# define YYSTYPE_IS_TRIVIAL 1
 #endif
-
 
 extern YYSTYPE yylval;
 
-int yyparse (void);
-
-#endif /* !YY_YY_Y_TAB_H_INCLUDED  */
