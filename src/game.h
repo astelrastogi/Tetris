@@ -11,12 +11,13 @@ public:
     void trasformTetromino(int);
     int level = 0;
 
+
 private:
     bool collideWithTetrominoes();
     bool isRowCompleted(int);
     void deleteRow(int);
     void updateScore();
-    int const static b_h = Tetromino::b_h, b_w = Tetromino::b_w;
+    int const static b_h = Tetromino::gy, b_w = Tetromino::gx;
     int board[b_h][b_w] = {};
     int completedRows = 0;
     int score = 0;
