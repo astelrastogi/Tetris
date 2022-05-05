@@ -1,6 +1,11 @@
+#include <vector>
+using std::vector;
+
 #ifndef tetrominoes_H
 #define tetrominoes_H
 
+extern vector<vector<vector<vector<int>>>> tets;
+//(7, vector<vector<vector<int>>>(4, vector<vector<int>>(4, vector<int>(4, 0))));;
 // Collection of all tetraminios and all possible rotation based on
 // Super rotation system https://strategywiki.org/wiki/Tetris/Rotation_systems
 // I, J, L, O, S, T, Z
@@ -9,7 +14,8 @@
 //              │  ┌ rotation
 //              │  │  ┌ height
 //              │  │  │  ┌ width
-int tetrominoes[7][4][4][4] = {
+extern int tetrominoes[7][4][4][4];
+/*= {
     {
         {
             {0, 0, 0, 0},
@@ -193,5 +199,5 @@ int tetrominoes[7][4][4][4] = {
         }
     }
 };
-
+ */
 #endif

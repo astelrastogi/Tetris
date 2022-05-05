@@ -3,6 +3,11 @@
 #include "game.h"
 #include "tetromino.h"
 
+/*Game::Game(){
+    int b_h = gy;
+    int b_w = gx;
+}*/
+
 void Game::render () {
     int colorRendered;
 
