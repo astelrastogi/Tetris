@@ -1,4 +1,9 @@
-# Tetris
+# Tetris Game Engine
+
+Game engine for making tetris 
+
+## Features
+1. Customizeable blocks
 
 
 ## Run the program
